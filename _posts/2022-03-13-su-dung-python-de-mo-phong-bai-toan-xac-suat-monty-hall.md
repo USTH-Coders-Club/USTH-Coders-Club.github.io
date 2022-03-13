@@ -215,11 +215,11 @@ Các bạn nhớ chỉnh variable `STRATEGY` (chiến thuật) để xem kết q
 
 Đúng theo dự đoán, nếu người chơi **giữ nguyên** lựa chọn ban đầu của mình và **không thay đổi** cửa thì tỷ lệ thắng sẽ là **1/3**:
 
-![nosw.png](assets/images/nosw.png)
+![Kết quả khi không đổi cửa](/assets/images/nosw.png)
 
 Còn nếu người người chơi **chọn lại cánh cửa khác** thì tỷ lệ thắng là **2/3**:
 
-![sw.png](assets/images/sw.png)
+![Kết quả khi đổi cửa](/assets/images/sw.png)
 
 Như vậy là chúng ta đã hoàn thành việc “test thử” **Monty Hall** có đúng không. Các bạn hãy thoải mái chỉnh sửa code theo ý mình nhé và xem kết quả sẽ thay đổi như nào nhé. Một gợi ý nhỏ: chương trình ở trên, MC luôn chọn cửa **sai** và **khác** với lựa chọn của người chơi; nếu người chơi **chọn cửa sai** và MC **mở cửa đó** thì tỷ lệ thắng khi người chơi chọn lại cửa là bao nhiêu? Mọi người hãy thử chỉnh sửa code và tìm ra kết quả nhé.
 
@@ -310,4 +310,4 @@ print(f"Wins: {WINS}")
 print(f"Winning probability: {WINS / TEST_SAMPLE}")
 ```
 
-[test.py](assets/code/test.py)
+[test.py](/assets/code/test.py)
