@@ -14,7 +14,7 @@ def get_unchoosen_door(chosen_doors):
     # Loại bỏ những cửa đã chọn.
     for choice in chosen_doors:
         if choice in doors_selection:
-            doors_selection.remove(i)
+            doors_selection.remove(choice)
 
     # Nếu có một cửa chưa được chọn thì chọn cửa đó. Nếu không chọn ngẫu nhiên 1 trong 2 cửa còn lại.
     if len(doors_selection) == 1:
