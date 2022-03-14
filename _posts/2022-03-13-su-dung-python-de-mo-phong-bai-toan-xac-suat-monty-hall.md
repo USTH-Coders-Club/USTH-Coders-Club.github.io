@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Sử dụng Python để mô phỏng bài toán xác suất Monty Hall"
-author: [tung, rylie]
+author: tung
 categories: [ python, math ]
 tags: [probability, coding]
 image: assets/images/11.jpg
 description: "Bài toán xác suất kinh điển **Monty Hall** một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, **UCC** sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình **Python** để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được."
 featured: true
-hidden: true
 ---
 
 Bài toán xác suất kinh điển **Monty Hall** một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, **UCC** sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình **Python** để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được.
@@ -82,7 +81,7 @@ def get_unchoosen_door(chosen_doors):
    # Loại bỏ những cửa đã chọn.
    for choice in chosen_doors:
        if choice in doors_selection:
-           doors_selection.remove(i)
+           doors_selection.remove(choice)
 
    # Nếu có một cửa chưa được chọn thì chọn cửa đó. Nếu không chọn ngẫu nhiên 1 trong 2 cửa còn lại.
    if len(doors_selection) == 1:
@@ -242,7 +241,7 @@ def get_unchoosen_door(chosen_doors):
    # Loại bỏ những cửa đã chọn.
    for choice in chosen_doors:
        if choice in doors_selection:
-           doors_selection.remove(i)
+           doors_selection.remove(choice)
 
    # Nếu có một cửa chưa được chọn thì chọn cửa đó. Nếu không chọn ngẫu nhiên 1 trong 2 cửa còn lại.
    if len(doors_selection) == 1:
