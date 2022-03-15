@@ -43,6 +43,14 @@ authors:
         display_name: "Nguyễn Thanh Tùng"
         email: "tungnt.bi12-473@st.usth.edu.vn"
         description: "UCC Gen2 RnD member."
+    nhatthanh:
+        name: "Đỗ Nhật Thành"
+        display_name: "Đỗ Nhật Thành"
+        avatar: "assets/images/picklerick.jpg"
+        gravatar: 64ecaecdaf5d947ee0cddb3168087b0d
+        email: "thanhdn.bi12-416@st.usth.edu.vn"
+        web: "https://thanlanslab.wordpress.com/"
+        description: "UCC Gen2 RnD member."
 
 # Plugins
 plugins:
