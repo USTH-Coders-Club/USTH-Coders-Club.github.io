@@ -1,5 +1,5 @@
 <!-- begin post -->
-{% assign author = site.authors[post.author] %}
+<!-- {% assign authors = site.authors[post.author] %} -->
 <div class="col-md-6 mb-30px">
     <div class="listfeaturedtag h-100">
         <div class="row h-100">
@@ -34,6 +34,8 @@
                         <div class="card-footer b-0 bg-white mt-auto">
                             <div class="wrapfooter">
                                 {% if post.author %}
+                                {% for each_author in post.author %}
+                                {% assign author = site.authors[each_author] %}
                                 <span class="meta-footer-thumb">
                                 {% if author.avatar %}
                                 <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
@@ -43,6 +45,7 @@
                                 </span>
                                 <span class="author-meta">
                                 <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
+                                {% endfor %}
                                 {% endif %}
                                 <span class="post-date">{{ post.date | date_to_string }}</span>
                                 </span>
