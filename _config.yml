@@ -51,6 +51,13 @@ authors:
         email: "thanhdn.bi12-416@st.usth.edu.vn"
         web: "https://thanlanslab.wordpress.com/"
         description: "UCC Gen2 RnD member."
+    Ph1eu:
+        name: "Phạm Minh Hiếu"
+        display_name: "Phạm Minh Hiếu"
+        avatar: "assets/images/rengoku-ava.jpg"
+        email: hieupm.bi11-090@st.usth.edu.vn"
+        kaggle: "https://www.kaggle.com/ph1euvn"
+        description: "UCC Gen2 RnD member."
 
 # Plugins
 plugins:
