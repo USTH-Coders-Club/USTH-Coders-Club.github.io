@@ -30,8 +30,6 @@
         <div class="card-footer bg-white">
             <div class="wrapfooter">
                 {% if post.author %}
-                {% for each_author in post.author %}
-                {% assign author = site.authors[each_author] %}
                 <span class="meta-footer-thumb">
                 {% for each_author in post.author %}
                 {% assign author = site.authors[each_author] %}
