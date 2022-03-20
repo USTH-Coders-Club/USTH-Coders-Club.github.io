@@ -46,7 +46,6 @@
                 {% for each_author in post.author %}
                 {% assign author = site.authors[each_author] %}
                 <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
-                {% endfor %}
 
                 {% endif %}
                 <span class="post-date">{{ post.date | date_to_string }}</span>
