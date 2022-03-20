@@ -7,7 +7,6 @@ favicon: "assets/images/logo.png"
 baseurl: ""
 google_analytics: "UA-46278016-1"
 disqus: "demowebsite"
-mailchimp-list: "https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b"
 include: ["_pages"]
 permalink: /:title/
 url: https://usth-coders-club.github.io
@@ -42,7 +41,7 @@ authors:
         name: "Nguyễn Thanh Tùng"
         display_name: "Nguyễn Thanh Tùng"
         email: "tungnt.bi12-473@st.usth.edu.vn"
-        description: "UCC Gen2 RnD member."
+        description: "UCC Gen 2 RnD member."
     nhatthanh:
         name: "Đỗ Nhật Thành"
         display_name: "Đỗ Nhật Thành"
