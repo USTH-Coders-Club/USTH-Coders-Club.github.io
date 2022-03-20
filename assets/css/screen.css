@@ -15,6 +15,10 @@ html,
 body {
     font-family: "Inter", "Roboto", sans-serif;
 }
+
+.rouge-table {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
 .mainheading {
     padding: 1rem 0rem;
 }
