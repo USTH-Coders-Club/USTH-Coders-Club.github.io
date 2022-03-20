@@ -11,7 +11,7 @@ License: https://www.wowthemes.net/freebies-license/
         max-width: 80%;
     }
 }
-html {
+* {
     font-family: "Inter", "Roboto", sans-serif;
 }
 .mainheading {
