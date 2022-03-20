@@ -3,12 +3,16 @@ Template Name: Mediumish
 Copyright: Sal, WowThemes.net, https://www.wowthemes.net 
 License: https://www.wowthemes.net/freebies-license/ 
 */
-@media screen and (min-width:1500px) {
-    html { font-size:18px; } /* Increase the font size on higher resolutions */
-    .container {max-width:80%;}
+@media screen and (min-width: 1500px) {
+    html {
+        font-size: 18px;
+    } /* Increase the font size on higher resolutions */
+    .container {
+        max-width: 80%;
+    }
 }
 html {
-    font-family: "Roboto";
+    font-family: "Inter", "Roboto", sans-serif;
 }
 .mainheading {
     padding: 1rem 0rem;
@@ -27,10 +31,10 @@ a:hover {
 pre {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border: #E3EDF3 1px solid;
+    border: #e3edf3 1px solid;
     width: 100%;
     padding: 7px;
-    font-size: .9rem;
+    font-size: 0.9rem;
     white-space: pre;
     overflow: auto;
     background: #fff;
@@ -41,8 +45,8 @@ pre {
 }
 
 .mediumnavigation {
-    background: rgba(255, 255, 255, .97);
-    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
     transition: top 0.2s ease-in-out;
 }
 
@@ -66,7 +70,7 @@ section.recent-posts {
 }
 
 .section-title h2 {
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 25px;
     font-weight: 700;
     font-size: 1.4rem;
@@ -74,7 +78,7 @@ section.recent-posts {
 }
 
 .section-title span {
-    border-bottom: 1px solid rgba(0, 0, 0, .44);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.44);
     display: inline-block;
     padding-bottom: 20px;
     margin-bottom: -1px;
@@ -91,7 +95,7 @@ section.recent-posts {
     margin-bottom: 0rem;
 }
 
-@media (min-width:576px) {
+@media (min-width: 576px) {
     .card-columns.listfeaturedtag {
         -webkit-column-count: 2;
         -moz-column-count: 2;
@@ -99,7 +103,7 @@ section.recent-posts {
     }
 }
 
-@media (min-width:992px) {
+@media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 0.8rem;
         padding-left: 0.8rem;
@@ -107,9 +111,9 @@ section.recent-posts {
 }
 
 .listfeaturedtag {
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .listfeaturedtag .wrapthumbnail {
@@ -134,8 +138,8 @@ section.recent-posts {
     display: block;
     background-position: 38% 22% !important;
     background-origin: border-box !important;
-    border-top-left-radius: .25rem;
-    border-bottom-left-radius: .25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
 }
 
 .listfeaturedtag .card-block {
@@ -151,7 +155,7 @@ section.recent-posts {
 
 .listfeaturedtag h4.card-text,
 .listrecent h4.card-text {
-    color: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
     font-size: 0.95rem;
     line-height: 1.6;
     font-weight: 400;
@@ -164,7 +168,7 @@ section.recent-posts {
     max-height: 100%;
 }
 
-@media (max-width:991px) {
+@media (max-width: 991px) {
     .featured-box-img-cover {
         height: auto;
         width: 100%;
@@ -172,7 +176,7 @@ section.recent-posts {
 }
 
 .wrapfooter {
-    font-size: .8rem;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -200,7 +204,7 @@ section.recent-posts {
 
 .post-top-meta span {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
     display: inline-block;
 }
 
@@ -230,7 +234,7 @@ span.author-meta {
 
 span.post-date,
 span.post-read {
-    color: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
 }
 
 span.post-read-more {
@@ -241,12 +245,12 @@ span.post-read-more {
 }
 
 span.post-read-more a {
-    color: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
 }
 
 span.post-name a,
 span.post-read-more a:hover {
-    color: rgba(0, 0, 0, .8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .dot:after {
@@ -286,7 +290,7 @@ span.post-read-more a:hover {
 
 .mediumnavigation .dropdown-menu {
     border: 1px solid rgba(0, 0, 0, 0.08);
-    margin: .5rem 0 0;
+    margin: 0.5rem 0 0;
 }
 
 .mediumnavigation .nav-item,
@@ -307,7 +311,7 @@ span.post-read-more a:hover {
 }
 
 .mainheading h1.sitetitle {
-    font-family: "Inter";
+    font-weight: bold;
 }
 
 .mainheading h1.posttitle {
@@ -316,11 +320,11 @@ span.post-read-more a:hover {
 }
 
 .footer {
-    border-top: 1px solid rgba(0, 0, 0, .05) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
     padding-top: 15px;
     padding-bottom: 12px;
     font-size: 0.8rem;
-    color: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
     margin-top: 50px;
     margin-bottom: 62px;
     position: relative;
@@ -328,20 +332,20 @@ span.post-read-more a:hover {
 }
 
 .link-dark {
-    color: rgba(0, 0, 0, .8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .article-post {
     font-size: 1.1rem;
     line-height: 1.84;
-    color: rgba(0, 0, 0, .8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 blockquote {
     border-left: 4px solid #00ab6b;
     padding: 0 20px;
     font-style: italic;
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .article-post p,
@@ -390,23 +394,23 @@ blockquote {
     top: 100px;
 }
 
-@media (min-width:1024px) {
+@media (min-width: 1024px) {
     .share ul li {
         display: block;
     }
 }
 
-@media (max-width:999px) {
+@media (max-width: 999px) {
     .featured-box-img-cover {
         height: 359px;
     }
 
     .alertbar {
-        position: relative !Important;
+        position: relative !important;
         margin-bottom: 20px;
         margin-top: 20px;
-        box-shadow: none !Important;
-        padding-right: 14px !Important;
+        box-shadow: none !important;
+        padding-right: 14px !important;
     }
 
     #comments {
@@ -414,7 +418,7 @@ blockquote {
     }
 
     .jumbotron.fortags {
-        margin-bottom: 0 !Important;
+        margin-bottom: 0 !important;
     }
 
     .alertbar form {
@@ -427,13 +431,13 @@ blockquote {
     }
 
     .alertbar input[type="submit"] {
-        border-radius: 3px !Important;
+        border-radius: 3px !important;
     }
 
     .alertbar input[type="email"] {
-        margin-right: 0px !Important;
+        margin-right: 0px !important;
         display: block;
-        border-right: 1px solid #ddd !Important;
+        border-right: 1px solid #ddd !important;
         margin-bottom: 10px;
     }
 
@@ -461,13 +465,13 @@ blockquote {
     }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
     .post-top-meta .col-md-10 {
         text-align: center;
     }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
     .post-top-meta.authorpage {
         text-align: center;
     }
@@ -475,8 +479,8 @@ blockquote {
 
 .share,
 .share a {
-    color: rgba(0, 0, 0, .44);
-    fill: rgba(0, 0, 0, .44);
+    color: rgba(0, 0, 0, 0.44);
+    fill: rgba(0, 0, 0, 0.44);
 }
 
 .graybg {
@@ -486,7 +490,7 @@ blockquote {
 }
 
 .listrelated .card {
-    box-shadow: 0 1px 7px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
     border: 0;
 }
 
@@ -502,14 +506,14 @@ ul.tags li {
 }
 
 ul.tags li a {
-    background: rgba(0, 0, 0, .05);
-    color: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.6);
     border-radius: 3px;
     padding: 5px 10px;
 }
 
 ul.tags li a:hover {
-    background: rgba(0, 0, 0, .07);
+    background: rgba(0, 0, 0, 0.07);
     text-decoration: none;
 }
 
@@ -526,8 +530,8 @@ ul.tags li a:hover {
 }
 
 .btn.follow {
-    border-color: #02B875;
-    color: #1C9963;
+    border-color: #02b875;
+    color: #1c9963;
     padding: 3px 10px;
     text-align: center;
     border-radius: 999em;
@@ -536,8 +540,8 @@ ul.tags li a:hover {
 }
 
 .btn.subscribe {
-    background-color: #1C9963;
-    border-color: #1C9963;
+    background-color: #1c9963;
+    border-color: #1c9963;
     color: rgba(255, 255, 255, 1);
     fill: rgba(255, 255, 255, 1);
     border-radius: 30px;
@@ -553,7 +557,7 @@ ul.tags li a:hover {
 }
 
 .alertbar {
-    box-shadow: 0 -3px 10px 0 rgba(0, 0, 0, .0785);
+    box-shadow: 0 -3px 10px 0 rgba(0, 0, 0, 0.0785);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -582,8 +586,8 @@ ul.tags li a:hover {
 }
 
 .alertbar input[type="submit"] {
-    background-color: #1C9963;
-    border: 1px solid #1C9963;
+    background-color: #1c9963;
+    border: 1px solid #1c9963;
     color: rgba(255, 255, 255, 1);
     fill: rgba(255, 255, 255, 1);
     font-size: 0.85rem;
@@ -598,23 +602,23 @@ ul.tags li a:hover {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control:-moz-placeholder {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control::-moz-placeholder {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control:-ms-input-placeholder {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control::-ms-input-placeholder {
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .authorpage h1 {
@@ -628,7 +632,7 @@ ul.tags li a:hover {
 
 .authorpage .author-description {
     font-size: 1rem;
-    color: rgba(0, 0, 0, .6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .post-top-meta.authorpage .btn.follow {
@@ -691,9 +695,9 @@ ul.tags li a:hover {
 }
 
 .article-post img.shadow {
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.30);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.30);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.30);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
 .layout-page .article-post {
@@ -752,7 +756,7 @@ iframe {
     color: #fff;
 }
 
-@media (min-width:768px) {
+@media (min-width: 768px) {
     .jumbotron.fortags {
         margin-bottom: -50px;
         margin-top: 3rem;
@@ -840,7 +844,7 @@ iframe {
 .spoiler {
     color: transparent;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    transition: all .4s;
+    transition: all 0.4s;
     cursor: pointer;
     position: relative;
 }
@@ -848,7 +852,7 @@ iframe {
 .spoiler:after {
     position: absolute;
     opacity: 0;
-    content: 'Click to reveal spoiler';
+    content: "Click to reveal spoiler";
     top: 45%;
     left: calc(50% - 100px);
     text-shadow: none;
@@ -861,7 +865,7 @@ iframe {
     width: 150px;
     text-align: center;
     border-radius: 3px;
-    transition: all .4s;
+    transition: all 0.4s;
 }
 
 .spoiler:hover:after {
@@ -873,7 +877,7 @@ iframe {
     display: block;
     border: 0 none;
     opacity: 1;
-    transition: opacity .25s;
+    transition: opacity 0.25s;
     background: #f2f2f2;
     outline: 0 none;
 }
@@ -881,5 +885,5 @@ iframe {
 .lazyimg[data-src],
 .lazyimg[data-srcset] {
     opacity: 0;
-    transition: opacity .25s;
+    transition: opacity 0.25s;
 }
