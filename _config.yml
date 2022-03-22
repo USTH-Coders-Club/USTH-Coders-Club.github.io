@@ -24,7 +24,7 @@ authors:
     john:
         name: John
         display_name: John
-        avatar: "assets/images/avatar.png"
+        avatar: "assets/images/avatar/avatar.png"
         gravatar: b1cc14991db7a456fcd761680bbc8f81
         email: wowthemesnet@gmail.com
         web: https://www.wowthemes.net
@@ -33,7 +33,7 @@ authors:
     rylie:
         name: "Nguyễn Phạm Quốc An"
         display_name: "Nguyễn Phạm Quốc An"
-        avatar: "assets/images/Aqukinn.png"
+        avatar: "assets/images/avatar/Aqukinn.png"
         web: https://j1nxie.github.io
         twitter: https://twitter.com/_lumi9
         description: "UCC Gen2 RnD member."
@@ -45,7 +45,7 @@ authors:
     nhatthanh:
         name: "Đỗ Nhật Thành"
         display_name: "Đỗ Nhật Thành"
-        avatar: "assets/images/picklerick.jpg"
+        avatar: "assets/images/avatar/picklerick.jpg"
         gravatar: 64ecaecdaf5d947ee0cddb3168087b0d
         email: "thanhdn.bi12-416@st.usth.edu.vn"
         web: "https://thanlanslab.wordpress.com/"
@@ -53,7 +53,7 @@ authors:
     Ph1eu:
         name: "Phạm Minh Hiếu"
         display_name: "Phạm Minh Hiếu"
-        avatar: "assets/images/rengoku-ava.jpg"
+        avatar: "assets/images/avatar/rengoku-ava.jpg"
         email: "hieupm.bi11-090@st.usth.edu.vn"
         kaggle: "https://www.kaggle.com/ph1euvn"
         description: "UCC Gen2 RnD member."
