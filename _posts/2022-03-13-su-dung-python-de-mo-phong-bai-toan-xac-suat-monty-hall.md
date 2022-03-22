@@ -4,7 +4,7 @@ title: "Sử dụng Python để mô phỏng bài toán xác suất Monty Hall"
 author: [tung, nhatthanh]
 categories: [ python, math ]
 tags: [probability, coding]
-image: assets/images/11.jpg
+image: assets/images/banner/11.jpg
 description: "Bài toán xác suất kinh điển **Monty Hall** một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, **UCC** sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình **Python** để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được."
 featured: true
 ---
@@ -15,7 +15,7 @@ Bài toán xác suất kinh điển **Monty Hall** một thời đã thách th�
 
 **Marilyn vos Savant** là một phụ nữ được sách kỷ lục **Guinness** công nhận là người có chỉ số IQ cao nhất thế giới (228) trong khoảng thời gian từ năm 1985 đến 1989. Bà cũng là tác giả cho tạp chí **Parade** của Mỹ và phụ trách chuyên mục “**Ask Marilyn**”, nơi người đọc có thể gửi các câu đố và **Vos Savant** sẽ trả lời chúng. 
 
-![https://america.cgtn.com/wp-content/uploads/2016/08/Marilyn-vos-Savant.jpg](https://america.cgtn.com/wp-content/uploads/2016/08/Marilyn-vos-Savant.jpg)
+![Marilyn vos Savant](/assets/images/posts/monty-hall/marilyn.jpg)
 
 Vào năm **1990**, một độc giả tên là **Craig F. Whitaker** đã gửi cho tạp chí một câu đố có nội dung như sau:
 
@@ -24,13 +24,13 @@ Vào năm **1990**, một độc giả tên là **Craig F. Whitaker** đã gửi
 
 **Marilyn** đã nói rằng chúng ta nên **đổi**, và câu trả lời này đã thu hút rất nhiều phản hồi không đồng tình từ các độc giả, trong đó có rất nhiều tiến sĩ giáo sư từ các trường đại học. Bài toán này đã được đặt tên là “**Monty Hall**” vì nó rất giống với gameshow mang tên “**Let’s Make a Deal**” do **Monty Hall** làm người dẫn chương trình vào năm **1963**. 
 
-![https://m.media-amazon.com/images/M/MV5BNjUxNjMyZmUtYWE4Yi00Mzg2LWJkZmYtY2YyNjQ4ZmIyMGQwL2ltYWdlXkEyXkFqcGdeQXVyMTIxMDUyOTI@._V1_.jpg](https://m.media-amazon.com/images/M/MV5BNjUxNjMyZmUtYWE4Yi00Mzg2LWJkZmYtY2YyNjQ4ZmIyMGQwL2ltYWdlXkEyXkFqcGdeQXVyMTIxMDUyOTI@._V1_.jpg)
+![Monty Hall Show](/assets/images/posts/monty-hall/monty.jpg)
 
 Bài toán này thật ra đã được **Steve Selvin** giới thiệu và giải qua một lá thư gửi tạp chí khoa học **American Statistician** vào năm **1975**, tuy nhiên nó chỉ thật sự được nhiều người biết đến nhờ danh tiếng của **Marilyn vos Savant** cùng với câu trả lời gây tranh cãi của bà.
 
 ## Đáp án cho Bài toán
 
-![https://4.bp.blogspot.com/-eSxvTmeW-Cw/VOv_o5Y8PfI/AAAAAAAAAnA/kHNeAkcWD7s/s1600/yyhikvg.jpg](https://4.bp.blogspot.com/-eSxvTmeW-Cw/VOv_o5Y8PfI/AAAAAAAAAnA/kHNeAkcWD7s/s1600/yyhikvg.jpg)
+![Dap an cho bai toan](/assets/images/posts/monty-hall/overview.jpg)
 
 Gần như hầu hết mọi người sau khi đọc bài toán đều cho rằng sau khi người dẫn chương trình loại bỏ một cánh cửa có con dê, **tỉ lệ** người chơi chọn trúng cánh cửa có chiếc xe là **50%**, vậy nên việc đổi cửa hay không không quan trọng. Đó là câu trả lời chính xác nếu cánh cửa mà người dẫn chương trình chọn để mở hoàn toàn ngẫu nhiên. Tuy nhiên cánh cửa mà người dẫn chương trình mở thực chất phụ thuộc vào cánh cửa người chơi chọn, do đó tỷ lệ không còn là **50/50** nữa. Bảng dưới đây sẽ miêu tả rõ nhất tỉ lệ chọn trúng chiếc xe bằng cách liệt kê tất cả các trường hợp có thể xảy ra (người chơi ban đầu chọn **cánh cửa số 1**):
 
@@ -214,11 +214,11 @@ Các bạn nhớ chỉnh variable `STRATEGY` (chiến thuật) để xem kết q
 
 Đúng theo dự đoán, nếu người chơi **giữ nguyên** lựa chọn ban đầu của mình và **không thay đổi** cửa thì tỷ lệ thắng sẽ là **1/3**:
 
-![Kết quả khi không đổi cửa](/assets/images/nosw.png)
+![Kết quả khi không đổi cửa](/assets/images/posts/monty-hall/nosw.png)
 
 Còn nếu người người chơi **chọn lại cánh cửa khác** thì tỷ lệ thắng là **2/3**:
 
-![Kết quả khi đổi cửa](/assets/images/sw.png)
+![Kết quả khi đổi cửa](/assets/images/posts/monty-hall/sw.png)
 
 Như vậy là chúng ta đã hoàn thành việc “test thử” **Monty Hall** có đúng không. Các bạn hãy thoải mái chỉnh sửa code theo ý mình nhé và xem kết quả sẽ thay đổi như nào nhé. Một gợi ý nhỏ: chương trình ở trên, MC luôn chọn cửa **sai** và **khác** với lựa chọn của người chơi; nếu người chơi **chọn cửa sai** và MC **mở cửa đó** thì tỷ lệ thắng khi người chơi chọn lại cửa là bao nhiêu? Mọi người hãy thử chỉnh sửa code và tìm ra kết quả nhé.
 

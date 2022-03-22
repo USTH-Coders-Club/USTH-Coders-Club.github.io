@@ -10,10 +10,10 @@ comments: true
 
 <div class="d-flex justify-content-center">
     <div class="col-md-6">
-        <img src="{{site.baseurl}}/assets/images/1.jpg">
+        <img src="{{site.baseurl}}/assets/images/banner/1.jpg">
     </div>
     <div class="col-md-6">
-        <img src="{{site.baseurl}}/assets/images/2.jpg">
+        <img src="{{site.baseurl}}/assets/images/banner/2.jpg">
     </div>
 </div>
 
