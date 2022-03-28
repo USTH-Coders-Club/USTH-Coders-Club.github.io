@@ -27,19 +27,19 @@ comments: true
         <img src="{{site.baseurl}}/assets/images/about-us/learning.png" style="max-width:30%;">
         <hr/>
         <h4>Học tập</h4>
-        <p>Mang đến cho member của UCC nói riêng và bạn đọc nói chung những bài viết về lập trình chất lượng. </p>
+        <p>Với những bài blog sẽ giúp các members trau dồi, tích lũy kiến thức hỗ trợ cho công việc, học tập của chúng ta sau này.</p>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 m-3">
         <img src="{{site.baseurl}}/assets/images/about-us/sharing.png" style="max-width:30%">
         <hr/>
         <h4>Chia sẻ</h4>
-        <p>Mang đến cho member của UCC nói riêng và bạn đọc nói chung những bài viết về lập trình chất lượng. </p>
+        <p>Mang đến cho member của UCC nói riêng và bạn đọc nói chung những bài viết về lập trình chất lượng.</p>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 m-3">
         <img src="{{site.baseurl}}/assets/images/about-us/discussing.png" style="max-width:30%">
         <hr/>
         <h4>Thảo luận</h4>
-        <p>Mang đến cho member của UCC nói riêng và bạn đọc nói chung những bài viết về lập trình chất lượng. </p>
+        <p>Cùng nhau trao đổi ý kiến, phân tích để phát triển ý tưởng cũng như vấn đề của mọi người. Ngoài ra cũng là một cách để tìm kiếm đồng đội cùng chung chí hướng.</p>
     </div>
 </div>
 <h3>Bởi...</h3>
