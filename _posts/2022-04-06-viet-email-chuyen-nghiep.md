@@ -4,7 +4,7 @@ title: "Viết email một cách chuyên nghiệp"
 author: [khiem]
 categories: [skill]
 tags: [email]
-image: assets/images/banner/2.jpg
+image: assets/images/posts/04-06-2022-viet-email-chuyen-nghiep/email.png
 description: "Như các bạn đã biết, **email** là một phương tiện giao tiếp chính và được sử dụng phổ biến trong hầu hết mọi lĩnh vực công việc bởi sự tiện lợi của nó. Do vậy viết **email** là một kỹ năng quan trọng và rất cần thiết trong cuộc sống hiện đại. Hôm nay **UCC** sẽ hướng dẫn các bạn viết **email** một cách **chuyên nghiệp**"
 featured: true
 ---
