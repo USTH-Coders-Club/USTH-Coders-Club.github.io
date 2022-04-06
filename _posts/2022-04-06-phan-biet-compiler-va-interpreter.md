@@ -4,7 +4,7 @@ title: "Phân biệt Compiler và Interpreter"
 author: [rylie, htung]
 categories: [computer science]
 tags: [coding]
-image: assets/images/banner/1.jpg
+image: assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png
 description: "Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng."
 featured: true
 ---
@@ -45,7 +45,7 @@ Quá trình compile mã nguồn sẽ diễn ra khi có sự thay đổi trong m�
 
 ### Interpreter
 
-Trái với việc chỉ cần compile mã nguồn một lần rồi chạy, quá trình interpret mã ngusẽ luôn xảy ra mỗi khi ta chạy file mã nguồn kể cả khi mã nguồn không thay đổi, bởi vì interpreter không tạo ra file thực thi.
+Trái với việc chỉ cần compile mã nguồn một lần rồi chạy, quá trình interpret mã nguồn luôn xảy ra mỗi khi ta chạy file mã nguồn kể cả khi nó không thay đổi, bởi vì interpreter không tạo ra file thực thi.
 
 ## Hiệu năng
 
