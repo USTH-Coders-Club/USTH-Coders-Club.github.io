@@ -16,6 +16,15 @@ body {
     font-family: "Inter", "Roboto", sans-serif;
 }
 
+table {
+    margin: 20px;
+}
+th {
+    text-align: center;
+}
+td {
+    padding: 5px;
+}
 .rouge-table {
     font-family: "Consolas", "Courier New", Courier, monospace;
 }
