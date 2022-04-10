@@ -11,11 +11,11 @@ featured: true
 
 Như các bạn đã biết, **email** là một phương tiện giao tiếp chính và được sử dụng phổ biến trong hầu hết mọi lĩnh vực công việc bởi sự tiện lợi của nó. Do vậy viết **email** là một kỹ năng quan trọng và rất cần thiết trong cuộc sống hiện đại. Hôm nay **UCC** sẽ hướng dẫn các bạn viết **email** một cách **chuyên nghiệp**.
 
-## **Tầm quan trọng của viết mail**
+## **1. Tầm quan trọng của viết mail**
 
 Việc đầu tiên chúng ta cần phải biết được tại sao việc viết email lại quan trọng. Khi bạn muốn liên hệ với thầy cô, nhà trường, cấp trên hay muốn ứng tuyển, xin việc vào một công ty nào đó, email sẽ là phương tiện đầu tiên để kết nối bạn với những nơi đó. Một chiếc email còn thể hiện con người, sự tôn trọng của bạn với người nhận. Tất nhiên không một ai muốn hợp tác với người mà họ không tôn trọng mình cả. Do đó khi viết email cho ai đó, bạn hãy thể hiện sự tôn trọng của mình qua một chiếc email chuyên nghiệp.
 
-## Một số thao tác cơ bản sử dụng Gmail
+## 2. Một số thao tác cơ bản sử dụng Gmail
 
 ### Bắt đầu soạn thảo một email
 
@@ -50,7 +50,7 @@ Ví dụ với hình ảnh dưới đây là một email của FLC gửi tới s
 
 Mọi người hãy lưu ý phần này trước khi phản hồi email của ai đó để tránh làm phiền tới người khác và tránh việc bạn có thể bị lộ thông tin cá nhân hay email riêng tư.
 
-## **Cách viết email chuyên nghiệp**
+## **3. Cách viết email chuyên nghiệp**
 
 Để viết được một email một cách chuyên nghiệp và tạo được ấn tượng tốt với người đọc, bạn hãy dựa theo 6 bước dưới đây:
 
@@ -126,7 +126,7 @@ Khiem.”
 
 ![signature.jpg](/assets/images/posts/04-06-2022-viet-email-chuyen-nghiep/signature.jpg)
 
-## **Những điều cần chú ý khi viết email.**
+## **4. Những điều cần chú ý khi viết email.**
 
 - Hãy đọc lại email của bạn trước khi gửi để kiểm tra các lỗi về **chính tả, dấu câu**.
 - Một email nên trọng tâm một nội dung. Nếu bạn nên soạn thêm một email nữa nếu định nói về mục đích khác.
