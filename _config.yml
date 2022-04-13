@@ -60,7 +60,9 @@ authors:
     htung:
         name: "Nguyễn Hoàng Tùng"
         display_name: "Nguyễn Hoàng Tùng"
+        avatar: "assets/images/avatar/tonguesten.png"
         email: "tung@tungsoft.net"
+        itch: "https://tonguesten.itch.io/"
         description: "UCC Gen2 RnD member."
     khiem:
         name: "Phạm Đức Khiêm"
