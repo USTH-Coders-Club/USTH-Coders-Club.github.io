@@ -20,9 +20,14 @@
 
         <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 
+        <link href="{{ site.baseurl }}/assets/css/dark-mode.css" rel="stylesheet" />
+
         <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 
         <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
+
+        <script src="{{ site.baseurl }}/assets/js/dark-mode-switch.min.js"></script>
+        <script src=""></script>
     </head>
 
     {% if jekyll.environment == 'production' %}
@@ -100,6 +105,11 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ site.baseurl }}/about">About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                            <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
                         </li>
 
                         {% include search-lunr.html %}
