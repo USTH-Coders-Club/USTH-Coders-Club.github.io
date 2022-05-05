@@ -20,7 +20,7 @@
 
         <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 
-        <link href="{{ site.baseurl }}/assets/css/dark-mode.css" rel="stylesheet" />
+        <link href="{{ site.baseurl }}/assets/css/cssdm.css" rel="stylesheet" />
 
         <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 
@@ -106,9 +106,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <input type="checkbox" class="custom-control-input, nav-link" id="darkSwitch" />
+                            <input class="container_toggle" type="checkbox" id="switch" name="mode">
+                            <label for="switch">Toggle</label>
                             
                         </li>
+                        <script src="{{ site.baseurl }}/assets/dm.js"></script>
                         <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
                         <script src="{{ site.baseurl }}/assets/js/dark-mode-switch.min.js"></script>
                         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
