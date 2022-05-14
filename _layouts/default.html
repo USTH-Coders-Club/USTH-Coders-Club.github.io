@@ -20,12 +20,9 @@
 
         <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 
-        <link href="{{ site.baseurl }}/assets/css/cssdm.css" rel="stylesheet" />
-
         <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 
-
-        <script src=""></script>
+        <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
     </head>
 
     {% if jekyll.environment == 'production' %}
@@ -104,19 +101,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ site.baseurl }}/about">About</a>
                         </li>
-
-                        <li class="nav-item">
-                            <input class="container_toggle" type="checkbox" id="switch" name="mode">
-                            <label for="switch">Toggle</label>
-                            
-                        </li>
-                        <script src="{{ site.baseurl }}/assets/dm.js"></script>
-                        <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
-                        <script src="{{ site.baseurl }}/assets/js/dark-mode-switch.min.js"></script>
-                        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-                        
 
                         {% include search-lunr.html %}
                     </ul>

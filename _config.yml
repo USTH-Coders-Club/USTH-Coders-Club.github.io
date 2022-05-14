@@ -70,6 +70,10 @@ authors:
         email: "khiempd.ba12-095@st.usth.edu.vn"
         avatar: "assets/images/avatar/kurisu.jpg"
         description: "UCC Gen2 RnD member."
+    vanquocan:
+        name: "Văn Quốc An"
+        display_name: "Văn Quốc An"
+        description: "UCC Gen2 RnD member."
 
 # Plugins
 plugins:

@@ -6,7 +6,7 @@ categories: [ python, math ]
 tags: [probability, coding]
 image: assets/images/posts/monty-hall/banner_monty_hall.png
 description: "Bài toán xác suất kinh điển **Monty Hall** một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, **UCC** sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình **Python** để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được."
-featured: false
+featured: true
 ---
 
 Bài toán xác suất kinh điển **Monty Hall** một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, **UCC** sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình **Python** để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được.
