@@ -6,7 +6,7 @@ categories: [computer science]
 tags: [coding]
 image: assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png
 description: "Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng."
-featured: true
+featured: false
 ---
 Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng.
 
