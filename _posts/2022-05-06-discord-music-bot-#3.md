@@ -6,7 +6,7 @@ categories: [javascript]
 tags: [coding]
 image: assets/images/posts/2022-05-06-discord-music-bot-3/banner.jpg
 description: "Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!"
-featured: true
+featured: false
 ---
 
 Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!
