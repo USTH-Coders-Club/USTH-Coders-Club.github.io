@@ -6,7 +6,7 @@ categories: [javascript]
 tags: [coding]
 image: assets/images/posts/2022-04-29-discord-music-bot-1/banner.jpg
 description: "Đầu tiên, UCC xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo Discord Music Bot vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, UCC sẽ có một series blog về cách hướng dẫn tạo một con bot có thể chơi nhạc trên Discord vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách cài đặt môi trường* để con bot Discord có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể inbox trực tiếp fanpage của UCC để hỏi, chúng mình luôn sẵn sàng giải đáp các thắc mắc của bạn."
-featured: true
+featured: false
 ---
 
 Đầu tiên, **UCC** xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo **Discord Music Bot** vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, **UCC** sẽ có một **series blog** về cách hướng dẫn tạo một con bot có thể chơi nhạc trên **Discord** vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách **cài đặt môi trường** để con **bot Discord** có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể **inbox** trực tiếp [fanpage của UCC](https://www.facebook.com/USTH.Coders.Club) để hỏi, chúng mình luôn **sẵn sàng giải đáp** các thắc mắc của bạn.
