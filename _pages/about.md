@@ -52,7 +52,7 @@ comments: true
 <p>Không ngừng tìm kiếm thử thách với những dự án đi cùng với những công nghệ mới nhất của thời đại để <b>Đổi mới</b> và bắt kịp với thế giới cũng là một giá trị không thể thiếu.</p>
 
 <h2 class="pt-5">Chúng tôi đến từ...</h2>
-<div class="text-center"><img src="{{site.baseurl}}/assets/images/about-us/mix.jpg" style="max-width:100%;"></div>
+<div class="text-center"><img src="{{site.baseurl}}/assets/images/about-us/about.png" style="max-width:100%;"></div>
 
 <h2 class="pt-5">Thành tích</h2>
 <p>Đóng góp cho trang web trực tuyến về bảo vệ trẻ em của VNCERT.</p>

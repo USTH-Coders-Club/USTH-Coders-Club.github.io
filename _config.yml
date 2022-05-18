@@ -57,6 +57,23 @@ authors:
         email: "hieupm.bi11-090@st.usth.edu.vn"
         kaggle: "https://www.kaggle.com/ph1euvn"
         description: "UCC Gen2 RnD member."
+    htung:
+        name: "Nguyễn Hoàng Tùng"
+        display_name: "Nguyễn Hoàng Tùng"
+        avatar: "assets/images/avatar/tonguesten.png"
+        email: "tung@tungsoft.net"
+        itch: "https://tonguesten.itch.io/"
+        description: "UCC Gen2 RnD member."
+    khiem:
+        name: "Phạm Đức Khiêm"
+        display_name: "Phạm Đức Khiêm"
+        email: "khiempd.ba12-095@st.usth.edu.vn"
+        avatar: "assets/images/avatar/kurisu.jpg"
+        description: "UCC Gen2 RnD member."
+    vanquocan:
+        name: "Văn Quốc An"
+        display_name: "Văn Quốc An"
+        description: "UCC Gen2 RnD member."
 
 # Plugins
 plugins:

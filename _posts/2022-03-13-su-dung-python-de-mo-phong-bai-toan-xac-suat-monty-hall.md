@@ -120,43 +120,43 @@ for test in range(TEST_SAMPLE):
 Variable `result` ở đây dùng để lưu lại kết quả của mỗi mỗi lượt chơi:
 
 ```python
-# Variable lưu lại kết quả của mỗi lượt.
+   # Variable lưu lại kết quả của mỗi lượt.
    result = ""
 ```
 
 **Bước 1**: chọn ra một cửa đúng, việc này giống như chúng ta đang xáo trộn vị trí của các cánh cửa. Ở đây chúng ta sẽ dùng hàm `choose()` được tạo ở trên để mô phỏng việc đó:
 
 ```python
-# Chọn ngẫu nhiên một cửa đúng.
+   # Chọn ngẫu nhiên một cửa đúng.
    correct_door = choose()
 ```
 
 **Bước 2**: người chơi chọn một cánh cửa ngẫu nhiên. Chúng ta lại dùng hàm `choose()`:
 
 ```python
-# Người chơi chọn một cửa.
+   # Người chơi chọn một cửa.
    first_choice = choose()
 ```
 
 **Bước 3**: MC sẽ mở ra một cửa sai. LƯU Ý: MC sẽ luôn mở ra cửa sai và khác với lựa chọn của người chơi. Vì vậy chúng ta dùng hàm `get_unchoosen_door()` đã tạo và thêm vào argument là một list gồm lựa chọn đầu tiên của người chơi và cánh cửa đúng `[first_choice, correct_door]`. Hàm `get_unchoosen_door()` sẽ loại bỏ những lựa chọn trong list đó và trả lại cánh cửa còn lại:
 
 ```python
-# MC mở một ra một cửa sai.
-# Lưu ý: mc luôn mở ra cửa sai và không phải là cửa người chơi đã chọn.
+   # MC mở một ra một cửa sai.
+   # Lưu ý: mc luôn mở ra cửa sai và không phải là cửa người chơi đã chọn.
    incorrect_door = get_unchoosen_door([first_choice, correct_door])
 ```
 
 Chúng ta thêm lựa chọn của người chơi, MC, cửa đúng vào variable `result` để lưu lại. Ở đây có dùng một tính năng rất hay trong python đó là **template string** để chèn các dữ liệu vào giữa một string mà không cần cộng các string lại. Để sử dụng **template string**, ta thêm chữ “`f`” đằng trước một string bình thường; các biến được chèn thêm sẽ được đặt trong `{}`:
 
 ```python
-# Lưu lại lựa chọn.
+   # Lưu lại lựa chọn.
    result += f"1st choice: {first_choice} | incorrect door: {incorrect_door} | correct door: {correct_door}"
 ```
 
 **Bước 4**: Người chơi có quyền chọn lại cửa hoặc giữ nguyên lựa chọn ban đầu. Nếu dùng chiến thuật đổi cửa, chúng ta lại sử dụng hàm `get_unchoosen_door()` để chọn một cánh cửa khác với lựa chọn ban đầu và cánh cửa sai do MC mở (`[first_choice, incorrect_door]`). Nếu không, người chơi sẽ giữ nguyên cửa ban đầu. Ta lưu lựa chọn này lại vào variable `result`:
 
 ```python
-	 if STRATEGY:
+   if STRATEGY:
        # Nếu chọn chiến thuật 1 người chơi sẽ đổi cửa.
        final_choice = get_unchoosen_door([first_choice, incorrect_door])
        result += f" | final choice: {final_choice}"
@@ -169,7 +169,7 @@ Chúng ta thêm lựa chọn của người chơi, MC, cửa đúng vào variabl
 **Bước 5**: Kiểm tra người chơi có chọn đúng cửa hay không và lưu lại kết quả:
 
 ```python
-	 if final_choice == correct_door:
+   if final_choice == correct_door:
        # Nếu người chơi chọn đúng cửa, tăng số lượt thắng lên 1
        WINS += 1
        result += " | result: win"
@@ -180,7 +180,7 @@ Chúng ta thêm lựa chọn của người chơi, MC, cửa đúng vào variabl
 Thêm kết quả của lượt chơi này vào **list** các kết quả:
 
 ```python
-# Thêm kết quả của lượt chơi vào list các kết quả
+   # Thêm kết quả của lượt chơi vào list các kết quả
    RESULTS.append(result)
 ```
 
