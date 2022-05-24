@@ -6,7 +6,8 @@ categories: [skill]
 tags: [email]
 image: assets/images/posts/04-06-2022-viet-email-chuyen-nghiep/email.png
 description: "Như các bạn đã biết, **email** là một phương tiện giao tiếp chính và được sử dụng phổ biến trong hầu hết mọi lĩnh vực công việc bởi sự tiện lợi của nó. Do vậy viết **email** là một kỹ năng quan trọng và rất cần thiết trong cuộc sống hiện đại. Hôm nay **UCC** sẽ hướng dẫn các bạn viết **email** một cách **chuyên nghiệp**"
-featured: true
+featured: true  
+toc: true
 ---
 
 Như các bạn đã biết, **email** là một phương tiện giao tiếp chính và được sử dụng phổ biến trong hầu hết mọi lĩnh vực công việc bởi sự tiện lợi của nó. Do vậy viết **email** là một kỹ năng quan trọng và rất cần thiết trong cuộc sống hiện đại. Hôm nay **UCC** sẽ hướng dẫn các bạn viết **email** một cách **chuyên nghiệp**.
@@ -17,7 +18,7 @@ Như các bạn đã biết, **email** là một phương tiện giao tiếp ch�
 
 ## 2. Một số thao tác cơ bản sử dụng Gmail
 
-### Bắt đầu soạn thảo một email
+### 2.1 Bắt đầu soạn thảo một email
 
 Click vào **Soạn thư** để bắt đầu soạn một email mới:
 
@@ -39,7 +40,7 @@ Tại đây có 3 khu vực:
 - Khu vực chủ đề (Subject line)
 - Khu vực chứa nội dung
 
-### Lưu ý khi reply
+### 2.2 Lưu ý khi reply
 
 Ví dụ với hình ảnh dưới đây là một email của FLC gửi tới sinh viên về mở lớp bồi dưỡng Tiếng Pháp:
 
@@ -62,18 +63,18 @@ Mọi người hãy lưu ý phần này trước khi phản hồi email của ai
 5. **Phần kết**
 6. **Chữ ký**
 
-### 1. **Xác định đúng người nhận (Identify your goal)**
+### 3.1 **Xác định đúng người nhận (Identify your goal)**
 
 Đây có lẽ là phần ít người chú ý đầu tiên nhưng nó là điều **quan trọng nhất** bởi nếu không xác định được chính xác địa chỉ thì người nhận sẽ **không nhận được** thông tin từ bạn. Thêm vào đó, việc gửi sai địa chỉ email sẽ làm ảnh hưởng đến người nhận hay tệ hơn là thông tin, tài liệu của bạn sẽ bị người khác thấy và sử dụng nó vào mục đích xấu. Ví dụ bạn muốn gửi email xin nghỉ học vì lí do cá nhân cho phòng CTSV nhưng lại gửi nhầm cho cả khóa đọc được, trong khi đó các thầy cô lại không nhận được thông báo, dẫn đến một tình huống dở khóc dở cười. Đây là lỗi thường hay gặp của các bạn sinh viên mới vào trường chưa tìm hiểu kỹ. Vậy nên hãy tìm hiểu và kiểm tra thật kỹ địa chỉ email mà bạn muốn gửi trước khi soạn . Đối với các bạn sinh viên USTH, để tránh các trường hợp kể trên các bạn có thể tìm địa chỉ email của các phòng ban của trường **[tại đây](https://www.usth.edu.vn/en/contact/).**
 
-### 2. **Phần tiêu đề (Subject line)**
+### 3.2 **Phần tiêu đề (Subject line)**
 
 Tiêu đề sẽ là phần **tóm tắt nội dung chính** của bạn. Đây là điều quan trọng để người nhận nhanh chóng xác định được nội dung và có quyết định đọc nó hay không, bởi mỗi ngày họ có thể nhận rất nhiều email về các vấn đề khác nhau. Họ thường sẽ bỏ qua và không đọc những email không có tiêu đề vì họ nghĩ đó là thư rác, thư spam hoặc trong đó có thể chứa mã độc. Vậy nên bạn hãy đặt tiêu đề thật ngắn gọn và nêu đúng trọng tâm nội dung chính.
 
 > “BA03: Đơn xin phép nghỉ học Phạm Đức Khiêm (01/04/2022)”
 > 
 
-### 3. **Phần chào (Greeting)**
+### 3.3 **Phần chào (Greeting)**
 
 Khi mở đầu một bức thư, bạn hãy luôn thể hiện sự chuyên nghiệp và tôn trọng của mình qua lời chào. Thông thường chúng ta nên sử dụng  Dear/ Hi/ Kính gửi/ Gửi/ Chào…, tùy vào mối quan hệ của bạn với người nhận để dễ dàng xưng hô.
 
@@ -85,7 +86,7 @@ Khi mở đầu một bức thư, bạn hãy luôn thể hiện sự chuyên ngh
 > “Dear GED Dept,”
 > 
 
-### 4. Phần nội dung (Body)
+### 3.4 Phần nội dung (Body)
 
 Đây là phần nội dung chính của email. Bạn có thể giới thiệu qua bản thân như tên, nghề nghiệp, chức vụ để người đọc có thể dễ dàng xác định được bạn, đặc biệt với những người mà bạn chưa từng gặp. Bạn có thể bỏ qua phần này nếu bạn và người nhận đã biết nhau
 
@@ -102,14 +103,14 @@ Em viết email này là để xin phép nghỉ học vào ngày mai (ngày 01/0
 Em hứa vẫn sẽ đảm bảo chất lượng học tập và hoàn thành đầy đủ các nhiệm vụ giảng viên giao trong thời gian nghỉ. ”
 > 
 
-### 5. **Phần kết (Conclusion)**
+### 3.5 **Phần kết (Conclusion)**
 
 Ở phần này, bạn có thể nhắc lại yêu cầu của mình (nếu có) đã đưa ra ở phần nội dung. Hãy nhớ rằng phải gửi lời chào tạm biệt đầy ý nghĩa và lời cảm ơn tới người nhận. Nếu có ý muốn tiếp tục cuộc trò chuyện, bạn có thể mời người đọc trả lời bạn như “Tôi mong nhận được hồi âm từ bạn”.
 
 > “Em xin trân trọng cảm ơn.”
 > 
 
-### 6. **Ký tên (Signature)**
+### 3.6 **Ký tên (Signature)**
 
 Bạn hãy kết thúc email bằng những từ như “Trân trọng/ Thân mến/ Sincerely/…” trước khi đến phần ký tên. Đây là nơi bạn xác định chính mình bằng tên, chức vụ hay một số thông tin khác. Các bạn có thể dựa theo cấu trúc sau:
 

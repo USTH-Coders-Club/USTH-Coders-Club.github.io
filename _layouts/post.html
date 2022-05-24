@@ -72,14 +72,17 @@ post_class: post-template
                         <p><em>{{page.beforetoc}}</em></p>
                     {% endif %}
                     <div class="toc mt-4 mb-4 lead">
-                        <h3 class="font-weight-bold">Summary</h3>
-                        {% include toc.html html=content %}
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=1 h_max=3 item_class="tocp" %}
                     </div>
                 {% endif %}
                 <!-- End Toc -->
                 {{content}}
             </div>
-
+            <script src="/assets/js/tocbtn.js"></script>
             <!-- Rating -->
             {% if page.rating %}
             <div class="rating mb-4 d-flex align-items-center">

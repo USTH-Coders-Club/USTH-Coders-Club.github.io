@@ -7,6 +7,7 @@ tags: [coding]
 image: assets/images/posts/2022-05-01-discord-music-bot-2/banner.jpg
 description: "Ở Phần 1, UCC đã hướng dẫn các bạn cài đặt môi trường cho con bot hoạt động bao gồm Node.js và một số module đi kèm. Trong bài này, chúng mình sẽ chỉ cho bạn cách thiết lập một tài khoản Bot trong Discord, sau đó đăng nhập nó và code một số lệnh cơ bản bằng Javascript. Oke gét gô!"
 featured: false
+toc: true
 ---
 
 Ở Phần 1, **UCC** đã hướng dẫn các bạn cài đặt môi trường cho con bot hoạt động bao gồm **Node.js** và một số module đi kèm. Trong bài này, chúng mình sẽ chỉ cho bạn cách thiết lập một tài khoản Bot trong Discord, sau đó đăng nhập nó và code một số lệnh cơ bản bằng **Javascript**. Oke gét gô!
