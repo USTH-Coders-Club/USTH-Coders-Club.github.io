@@ -901,3 +901,36 @@ iframe {
     opacity: 0;
     transition: opacity 0.25s;
 }
+
+#my_toc {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display: table;
+    font-size: 95%;
+    margin-bottom: 1em;
+    padding: 20px;
+    width: auto;
+}
+
+.tocp {
+    font-weight: 700;
+    
+}
+
+#my_toc li, #my_toc ul, #my_toc ul li{
+    list-style: outside none none !important;
+}
+
+#btntoc{
+    color: #00ab6b;
+    padding-left: 10px;
+}
+
+#btntoc:hover {
+    cursor: pointer;
+    color: #00ab6b;
+}
+
+.divinline{
+    display: flex;
+}
