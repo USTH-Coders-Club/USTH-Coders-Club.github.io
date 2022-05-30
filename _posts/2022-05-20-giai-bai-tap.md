@@ -4,7 +4,7 @@ title: "Làm thế nào để giải quyết các bài toán gặp phải khi l�
 author: [tung]
 categories: [skill]
 tags: [code]
-image: assets/images/posts/04-06-2022-viet-email-chuyen-nghiep/email.png
+image: assets\images\posts\2022-05-20-giai-bai-tap\banner.png
 description: "Giải quyết các bài toán là việc mà chúng ta đều gặp phải hằng ngày trong mọi việc mà chúng ta làm. Lập trình cũng không phải là ngoại lệ. Hẳn là nhiều người khi mới học lập trình đều đã từng cảm thấy mông lung không biết phải giải quyết một bài toán như thế nào. Bài viết này sẽ chia sẻ hướng và các bước đơn giản để giải quyết một bài toán."
 featured: false  
 toc: true
