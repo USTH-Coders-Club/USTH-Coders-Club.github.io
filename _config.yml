@@ -5,7 +5,7 @@ description: "Chia sẻ về lập trình"
 logo: "assets/images/logo_fixed.png"
 favicon: "assets/images/icon_round_32.png"
 baseurl: ""
-google_analytics: "UA-46278016-1"
+google_analytics: "G-36DEMQV4QJ"
 disqus: "demowebsite"
 include: ["_pages"]
 permalink: /:title/
