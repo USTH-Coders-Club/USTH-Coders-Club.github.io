@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sử dụng Python để mô phỏng bài toán xác suất Monty Hall"
-author: [tung, nhatthanh]
+author: [tungngt, nhatthanh]
 categories: [ python, math ]
 tags: [probability, coding]
 image: assets/images/posts/monty-hall/banner_monty_hall.png
