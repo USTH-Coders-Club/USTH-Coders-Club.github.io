@@ -5,15 +5,12 @@ author: [nhatthanh]
 categories: [security]
 tags: [code, security]
 image: assets\images\posts\2022-07-19-solar-view\banner.png
-description: "Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - OS Command Injection - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Máy chủ này đang chạy ứng dụng SolarView Compact phiên bản 6.0, ứng dụng mà các nhà nghiên cứu bảo mật tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email. Lỗ hổng này đã được chương trình CVE của tập đoàn MITRE công nhận và gán cho mã định danh CVE-2022-29303 với điểm số mức độ nghiêm trọng là 9.8 CRITICAL, cho phép kẻ tấn công có thể chiếm quyền hệ thống."
+description: "Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - OS Command Injection - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản **6.0**. Lỗ hổng này đã được chương trình CVE của tập đoàn MITRE công nhận và gán cho mã định danh CVE-2022-29303 với điểm số mức độ nghiêm trọng là 9.8 CRITICAL, cho phép kẻ tấn công có thể chiếm quyền hệ thống."
 featured: true  
 toc: true
 ---
 
-
-# Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0
-
-Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - **OS Command Injection** - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Máy chủ này đang chạy ứng dụng SolarView Compact phiên bản **6.0**, ứng dụng mà các nhà nghiên cứu bảo mật tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email. Lỗ hổng này đã được chương trình [CVE](https://www.redhat.com/en/topics/security/what-is-cve) của tập đoàn MITRE công nhận và gán cho mã định danh **CVE-2022-29303** với điểm số mức độ nghiêm trọng là **9.8 CRITICAL**, cho phép kẻ tấn công có thể chiếm quyền hệ thống.  
+Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - **OS Command Injection** - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản **6.0**. Lỗ hổng này đã được chương trình [CVE](https://www.redhat.com/en/topics/security/what-is-cve) của tập đoàn MITRE công nhận và gán cho mã định danh **CVE-2022-29303** với điểm số mức độ nghiêm trọng là **9.8 CRITICAL**, cho phép kẻ tấn công có thể chiếm quyền hệ thống.  
 
 ## Giới thiệu về SolarView
 
