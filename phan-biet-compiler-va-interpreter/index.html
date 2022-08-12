@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>Phân biệt Compiler và Interpreter | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Phân biệt Compiler và Interpreter | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Phân biệt Compiler và Interpreter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng." />
+<meta property="og:description" content="Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng." />
+<link rel="canonical" href="https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-06T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png" />
+<meta property="twitter:title" content="Phân biệt Compiler và Interpreter" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-06T00:00:00+00:00","datePublished":"2022-04-06T00:00:00+00:00","description":"Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng.","headline":"Phân biệt Compiler và Interpreter","image":"https://usth-coders-club.github.io/assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Phân biệt Compiler và Interpreter&url=https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/phan-biet-compiler-va-interpreter/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/Aqukinn.png" alt="Nguyễn Phạm Quốc An">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="https://j1nxie.github.io">Nguyễn Phạm Quốc An</a><a target="_blank" href="https://twitter.com/_lumi9" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/tonguesten.png" alt="Nguyễn Hoàng Tùng">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Nguyễn Hoàng Tùng</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Phân biệt Compiler và Interpreter</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/posts/04-06-2022-phan-biet-compiler-interpreter/banner.png" alt="Phân biệt Compiler và Interpreter">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#so-sánh-tổng-quát">So sánh tổng quát</a></li>
+  <li class="tocp"><a href="#1-cách-thức-hoạt-động">1. Cách thức hoạt động</a>
+    <ul>
+      <li class="tocp"><a href="#compiler">Compiler</a></li>
+      <li class="tocp"><a href="#interpreter">Interpreter</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#2-hiệu-năng">2. Hiệu năng</a>
+    <ul>
+      <li class="tocp"><a href="#compiler-1">Compiler</a></li>
+      <li class="tocp"><a href="#interpreter-1">Interpreter</a></li>
+      <li class="tocp"><a href="#ví-dụ">Ví dụ:</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#3-môi-trường-chạy">3. Môi trường chạy</a>
+    <ul>
+      <li class="tocp"><a href="#compiler-2">Compiler</a></li>
+      <li class="tocp"><a href="#interpreter-2">Interpreter</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#4-một-số-ngôn-ngữ-điển-hình">4. Một số ngôn ngữ điển hình</a>
+    <ul>
+      <li class="tocp"><a href="#compiled">Compiled</a></li>
+      <li class="tocp"><a href="#interpreted">Interpreted</a></li>
+      <li class="tocp"><a href="#ngoại-lệ">Ngoại lệ</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#kết-luận">Kết luận</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Khi bắt đầu học lập trình, bạn sẽ nhiều lần bắt gặp khái niệm về Compiler và Interpreter. Chúng đều là những translator, có nhiệm vụ dịch mã nguồn thành các chỉ dẫn mà máy tính có thể hiểu và thực hiện (machine code). Nắm bắt được sự khác nhau cơ bản giữa hai khái niệm này sẽ giúp các bạn phân biệt mục đích của các ngôn ngữ lập trình và cách thức xử lý chúng.</p>
+
+<h2 id="so-sánh-tổng-quát">So sánh tổng quát</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Compiler</th>
+      <th>Interpreter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cách hoạt động</td>
+      <td>Dịch toàn bộ mã nguồn sang mã máy rồi cho ra một file thực thi.</td>
+      <td>Dịch từng đoạn mã nguồn sang mã máy và chạy trực tiếp.</td>
+    </tr>
+    <tr>
+      <td>Hiệu năng</td>
+      <td>Thường có hiệu năng cao hơn.</td>
+      <td>Thường có hiệu năng thấp hơn</td>
+    </tr>
+    <tr>
+      <td>Môi trường chạy</td>
+      <td>Có thể chạy trực tiếp trên các máy tương thích.</td>
+      <td>Các máy phải tải môi trường phù hợp để chạy như Python.</td>
+    </tr>
+    <tr>
+      <td>Các ngôn ngữ tiêu biểu</td>
+      <td>C, C++, Rust</td>
+      <td>Python, PHP, Ruby</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="1-cách-thức-hoạt-động">1. Cách thức hoạt động</h2>
+
+<h3 id="compiler">Compiler</h3>
+
+<p>Compiler tổng hợp và sắp xếp các dòng trong mã nguồn và dịch chúng về ngôn ngữ máy. Các library được sử dụng cũng sẽ được tập hợp lại và dùng trong quá trình compile. Cuối cùng, compiler sẽ trả lại file thực thi (chẳng hạn như file <strong>.exe</strong> trên Windows) mà bạn có thể chạy được. Việc này đồng nghĩa nếu mã nguồn không bị thay đổi thì bạn có thể chạy file thực thi đó mà không phải compile lại mỗi lần chạy.</p>
+
+<h3 id="interpreter">Interpreter</h3>
+
+<p>Interpreter sẽ dịch từng đoạn mã nguồn sang mã máy và chạy chúng luôn thay vì tổng hợp hết lại về một file thực thi. Ngoài ra một số biến thể khác của interpreter có thể hoạt đông theo cách dịch mã nguồn về native code cho <strong>virtual machine</strong> (máy ảo) của ngôn ngữ đó và chạy trên máy ảo. VD: Java. Thường quá trình interpret sẽ luôn chạy khi bạn chạy code dù cho mã nguồn không có sự thay đổi.</p>
+
+<h2 id="2-hiệu-năng">2. Hiệu năng</h2>
+
+<h3 id="compiler-1">Compiler</h3>
+
+<p>Như đã đề cập ở trên, compiler chỉ cần dịch mã nguồn một lần và tạo ra file thực thi; chính vì vậy, ứng dụng của bạn sẽ được tối ưu hóa và chạy nhanh hơn.</p>
+
+<h3 id="interpreter-1">Interpreter</h3>
+
+<p>Các ứng dụng được viết bằng interpreted language thường sẽ dịch lại mã nguồn mỗi lần chạy hoặc phải khởi động máy ảo vì vậy sẽ tốn thời gian hơn.</p>
+
+<h3 id="ví-dụ">Ví dụ:</h3>
+
+<p>Hãy tưởng tượng bạn có 2 ứng dụng có tính năng giống nhau; nhưng ứng dụng A được viết bằng compiled language và ứng dụng B được viết bằng interpreted language. Nếu bạn chạy 2 ứng dụng đó 5 lần thì ứng dụng A chỉ cần compile một lần. Trái lại ứng dụng B phải được interpret 5 lần. Vì thế mà ứng dụng A mỗi lần chạy sẽ nhanh hơn ứng dụng B.</p>
+
+<p>Tuy nhiên xét về việc bạn muốn thêm tính năng hay thay đổi mã nguồn của 2 ứng dụng này. Cả 2 ứng dụng đều phải compile và interpret lại mỗi khi bạn thay đổi mã nguồn. Nhưng quá trình compile thường sẽ chậm hơn interpret; vì vậy ứng dụng B lại được chạy nhanh hơn ứng dụng A.</p>
+
+<h2 id="3-môi-trường-chạy">3. Môi trường chạy</h2>
+
+<h3 id="compiler-2">Compiler</h3>
+
+<p>Do đã được compile về file thực thi, compile language có thể chạy trên máy tính mà không cần có môi trường đặc biệt.</p>
+
+<h3 id="interpreter-2">Interpreter</h3>
+
+<p>Interpreted language thường yêu cầu người dùng cài đặt môi trường chạy của ngôn ngữ đó ở trên máy. Ví dụ như Java sẽ yêu cầu người dùng cài đặt một phiên bản Java, trong đó gồm có Java Virtual Machine, Python thì cần có interpreter Python, tương tự đối với Ruby, …</p>
+
+<h2 id="4-một-số-ngôn-ngữ-điển-hình">4. Một số ngôn ngữ điển hình</h2>
+
+<h3 id="compiled">Compiled</h3>
+
+<ul>
+  <li>C++</li>
+  <li>C</li>
+  <li>Pascal</li>
+  <li>Objective-C</li>
+  <li>Rust</li>
+</ul>
+
+<h3 id="interpreted">Interpreted</h3>
+
+<ul>
+  <li>Python</li>
+  <li>Ruby</li>
+  <li>PHP</li>
+</ul>
+
+<h3 id="ngoại-lệ">Ngoại lệ</h3>
+
+<ul>
+  <li>Java: cách thức hoạt động của Java lại gần như sự kết hợp của cả hai - mã nguồn được dịch ra một ngôn ngữ trung cấp là Java bytecode, nhưng trong quá trình thực thi có thể sử dụng tới <strong>Just-In-Time Compiler</strong>, phần nào đó dịch một số đoạn mã nguồn ra native code dành cho hệ máy đó để có thể tăng tốc độ xử lý.</li>
+</ul>
+
+<h2 id="kết-luận">Kết luận</h2>
+
+<p>Tóm lại, compiler và interpreter đều hoạt động khác biệt với nhau, đi kèm đó là những ưu điểm và nhược điểm riêng của mỗi loại. Tùy vào mục đích sử dụng mà bạn có thể cân nhắc giữa compiled và interpreted language. Nếu chú trọng hiệu năng ứng dụng thì Compiled Languages là lựa chọn sáng giá; còn nếu muốn đẩy nhanh phát triển ứng dụng thì Interpreted Languages có thể sẽ tối ưu hơn.</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-04-06">06 Apr 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#computer-science">computer science</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#coding">#coding</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/"> &laquo; Sử dụng Python để mô phỏng bài toán xác suất Monty Hall</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//viet-email-chuyen-nghiep/">Viết email một cách chuyên nghiệp &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

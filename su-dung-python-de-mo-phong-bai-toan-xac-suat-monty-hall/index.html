@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>Sử dụng Python để mô phỏng bài toán xác suất Monty Hall | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Sử dụng Python để mô phỏng bài toán xác suất Monty Hall | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Sử dụng Python để mô phỏng bài toán xác suất Monty Hall" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Bài toán xác suất kinh điển Monty Hall một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, UCC sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình Python để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được." />
+<meta property="og:description" content="Bài toán xác suất kinh điển Monty Hall một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, UCC sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình Python để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được." />
+<link rel="canonical" href="https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets/images/posts/monty-hall/banner_monty_hall.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets/images/posts/monty-hall/banner_monty_hall.png" />
+<meta property="twitter:title" content="Sử dụng Python để mô phỏng bài toán xác suất Monty Hall" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-13T00:00:00+00:00","datePublished":"2022-03-13T00:00:00+00:00","description":"Bài toán xác suất kinh điển Monty Hall một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, UCC sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình Python để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được.","headline":"Sử dụng Python để mô phỏng bài toán xác suất Monty Hall","image":"https://usth-coders-club.github.io/assets/images/posts/monty-hall/banner_monty_hall.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Sử dụng Python để mô phỏng bài toán xác suất Monty Hall&url=https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/su-dung-python-de-mo-phong-bai-toan-xac-suat-monty-hall/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="https://www.gravatar.com/avatar/?s=250&d=mm&r=x" alt="Nguyễn Thanh Tùng">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Nguyễn Thanh Tùng</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen 2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/picklerick.jpg" alt="Đỗ Nhật Thành">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="https://thanlanslab.wordpress.com/">Đỗ Nhật Thành</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Sử dụng Python để mô phỏng bài toán xác suất Monty Hall</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/posts/monty-hall/banner_monty_hall.png" alt="Sử dụng Python để mô phỏng bài toán xác suất Monty Hall">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#nguồn-gốc">Nguồn gốc</a></li>
+  <li class="tocp"><a href="#đáp-án-cho-bài-toán">Đáp án cho Bài toán</a></li>
+  <li class="tocp"><a href="#lý-do-mô-phỏng-bài-toán-bằng-python">Lý do mô phỏng bài toán bằng Python</a></li>
+  <li class="tocp"><a href="#quá-trình-thực-hiện">Quá trình thực hiện</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Bài toán xác suất kinh điển <strong>Monty Hall</strong> một thời đã thách thức hàng ngàn bộ não trên thế giới, từ học sinh cấp 3 cho đến những giáo sư và các chuyên gia phân tích. Tính đến ngày nay, đã có rất nhiều lời giải thích và đáp án cho câu đố này dưới góc độ toán học xuất hiện trên Internet, chủ yếu sử dụng kiến thức về xác suất thống kê. Hôm nay, <strong>UCC</strong> sẽ giới thiệu cho các bạn một hướng tiếp cận khác, đó là sử dụng ngôn ngữ lập trình <strong>Python</strong> để mô phỏng lại tình huống bài toán, từ đó đưa ra lời giải thuyết phục nhất từ số liệu đã thu được.</p>
+
+<h2 id="nguồn-gốc">Nguồn gốc</h2>
+
+<p><strong>Marilyn vos Savant</strong> là một phụ nữ được sách kỷ lục <strong>Guinness</strong> công nhận là người có chỉ số IQ cao nhất thế giới (228) trong khoảng thời gian từ năm 1985 đến 1989. Bà cũng là tác giả cho tạp chí <strong>Parade</strong> của Mỹ và phụ trách chuyên mục “<strong>Ask Marilyn</strong>”, nơi người đọc có thể gửi các câu đố và <strong>Vos Savant</strong> sẽ trả lời chúng.</p>
+
+<p><img src="/assets/images/posts/monty-hall/marilyn.jpg" alt="Marilyn vos Savant" /></p>
+
+<p>Vào năm <strong>1990</strong>, một độc giả tên là <strong>Craig F. Whitaker</strong> đã gửi cho tạp chí một câu đố có nội dung như sau:</p>
+
+<blockquote>
+  <p>Giả sử bạn đang tham gia gameshow và phải lựa chọn một trong ba cánh cửa: đằng sau một cánh cửa là một <strong>chiếc xe hơi</strong> mới tinh, còn đằng sau hai cánh cửa còn lại là hai <strong>con dê</strong>. Nếu bạn chọn đúng cánh cửa có chiếc xe, bạn sẽ được sở hữu luôn chiếc xe đó, còn nếu bạn chọn phải cánh cửa mà đằng sau nó là một con dê thì bạn phải mang con dê đó về nhà. Bạn đã chọn cánh cửa <strong>số 1</strong>, sau đó người dẫn chương trình (đã biết cánh cửa nào có dê và xe) mở một cánh cửa mà đằng sau nó là một con dê, sau đó anh ta hỏi bạn có muốn <strong>đổi lựa chọn</strong> sang cánh cửa còn lại không. Bạn có nên đổi hay không?</p>
+
+</blockquote>
+
+<p><strong>Marilyn</strong> đã nói rằng chúng ta nên <strong>đổi</strong>, và câu trả lời này đã thu hút rất nhiều phản hồi không đồng tình từ các độc giả, trong đó có rất nhiều tiến sĩ giáo sư từ các trường đại học. Bài toán này đã được đặt tên là “<strong>Monty Hall</strong>” vì nó rất giống với gameshow mang tên “<strong>Let’s Make a Deal</strong>” do <strong>Monty Hall</strong> làm người dẫn chương trình vào năm <strong>1963</strong>.</p>
+
+<p><img src="/assets/images/posts/monty-hall/monty.jpg" alt="Monty Hall Show" /></p>
+
+<p>Bài toán này thật ra đã được <strong>Steve Selvin</strong> giới thiệu và giải qua một lá thư gửi tạp chí khoa học <strong>American Statistician</strong> vào năm <strong>1975</strong>, tuy nhiên nó chỉ thật sự được nhiều người biết đến nhờ danh tiếng của <strong>Marilyn vos Savant</strong> cùng với câu trả lời gây tranh cãi của bà.</p>
+
+<h2 id="đáp-án-cho-bài-toán">Đáp án cho Bài toán</h2>
+
+<p><img src="/assets/images/posts/monty-hall/overview.jpg" alt="Dap an cho bai toan" /></p>
+
+<p>Gần như hầu hết mọi người sau khi đọc bài toán đều cho rằng sau khi người dẫn chương trình loại bỏ một cánh cửa có con dê, <strong>tỉ lệ</strong> người chơi chọn trúng cánh cửa có chiếc xe là <strong>50%</strong>, vậy nên việc đổi cửa hay không không quan trọng. Đó là câu trả lời chính xác nếu cánh cửa mà người dẫn chương trình chọn để mở hoàn toàn ngẫu nhiên. Tuy nhiên cánh cửa mà người dẫn chương trình mở thực chất phụ thuộc vào cánh cửa người chơi chọn, do đó tỷ lệ không còn là <strong>50/50</strong> nữa. Bảng dưới đây sẽ miêu tả rõ nhất tỉ lệ chọn trúng chiếc xe bằng cách liệt kê tất cả các trường hợp có thể xảy ra (người chơi ban đầu chọn <strong>cánh cửa số 1</strong>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cánh cửa số 1</th>
+      <th>Cánh của số 2</th>
+      <th>Cánh cửa số 3</th>
+      <th>Kết quả nếu không đổi cửa</th>
+      <th>Kết quả nếu đổi cửa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dê</td>
+      <td>Dê</td>
+      <td>Xe</td>
+      <td>Cầm Dê về</td>
+      <td>Cầm Xe về</td>
+    </tr>
+    <tr>
+      <td>Dê</td>
+      <td>Xe</td>
+      <td>Dê</td>
+      <td>Cầm Dê về</td>
+      <td>Cầm Xe về</td>
+    </tr>
+    <tr>
+      <td>Xe</td>
+      <td>Dê</td>
+      <td>Dê</td>
+      <td>Cầm Xe về</td>
+      <td>Cầm Dê về</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Rõ ràng, lựa chọn đổi cửa cho chúng ta <strong>2/3</strong> cơ hội thắng được chiếc xe. Để tìm hiểu lời giải thích toán học chi tiết cho bài toán này, <a href="https://www.youtube.com/results?search_query=monty+hall+problem">Youtube</a> có rất nhiều video. Còn nếu bạn vẫn còn hoài nghi về kết quả trên, <strong>UCC</strong> sẽ mô phỏng sẽ sử dụng <strong>Python</strong> để mô phỏng người chơi, chọn ngẫu nhiên một cánh cửa và so sánh tỉ lệ thắng giữa hai quyết định đổi cửa và không đổi cửa qua một <strong>số lượng lượt chơi lớn</strong>.</p>
+
+<h2 id="lý-do-mô-phỏng-bài-toán-bằng-python">Lý do mô phỏng bài toán bằng Python</h2>
+
+<p><strong>Monty Hall</strong> là một bài toán dễ gây nhầm lẫn. Ngay cả khi đã cố gắng để giải bài toán nhiều lần hay xem video giải thích toán học, logic nhiều lần thì nhiều người vẫn không tin được tỉ lệ thắng khi đổi cánh cửa là 66%. <strong>UCC</strong> cũng biết vậy, chính vì thế chúng mình đã phải tự thân xác minh thật chắc chắn xem điều đó có đúng không. Bằng cách mô phỏng lại bài toán, chúng mình đã khám phá ra được nhiều điểm hay và cuối cùng cũng hiểu được cách hoạt động của nó.</p>
+
+<h2 id="quá-trình-thực-hiện">Quá trình thực hiện</h2>
+
+<p>Để mô phỏng trò chơi này, chúng ta cần thực hiện những bước chính sau:</p>
+
+<ol>
+  <li>Xác định một cửa đúng.</li>
+  <li>Người chơi chọn một cửa.</li>
+  <li>MC mở ra một cửa sai.</li>
+  <li>Người chơi có quyền chọn lại cửa hoặc giữ nguyên lựa chọn ban đầu.</li>
+  <li>Kiểm tra người chơi có chọn đúng cửa hay không.</li>
+</ol>
+
+<p>Đầu tiên chúng ta sẽ sử dụng thư viện <code class="language-plaintext highlighter-rouge">random</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c1"># Import thư viện random.
+</span><span class="kn">import</span> <span class="nn">random</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Tiếp theo tạo một function để mô phỏng việc chọn một cánh cửa ngẫu nhiên. Ở đây, chúng ta sử dụng hàm <code class="language-plaintext highlighter-rouge">random.randint(max, min)</code> để lấy ngẫu nhiên một số nguyên từ <strong>1 đến 3</strong> đại diện cho ba cánh cửa:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c1"># Chọn một cửa ngẫu nhiên số từ 1 -&gt; 3.
+</span><span class="k">def</span> <span class="nf">choose</span><span class="p">():</span>
+   <span class="k">return</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Tạo một <strong>function</strong> để chọn ra một cách cửa ngẫu nhiên khác với các cánh cửa đã được chọn. Function này sẽ giúp ta mô phỏng việc MC mở ra một cánh cửa sai và không phải cửa người chơi đã chọn:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="c1"># Chọn một cửa ngẫu nhiên trong những cửa chưa được chọn.
+</span><span class="k">def</span> <span class="nf">get_unchoosen_door</span><span class="p">(</span><span class="n">chosen_doors</span><span class="p">):</span>
+   <span class="n">doors_selection</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+   <span class="c1"># Loại bỏ những cửa đã chọn.
+</span>   <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">chosen_doors</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">doors_selection</span><span class="p">:</span>
+           <span class="n">doors_selection</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+
+   <span class="c1"># Nếu có một cửa chưa được chọn thì chọn cửa đó. Nếu không chọn ngẫu nhiên 1 trong 2 cửa còn lại.
+</span>   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">doors_selection</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">doors_selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">doors_selection</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Tiếp theo chúng ta sẽ tạo list <code class="language-plaintext highlighter-rouge">RESULTS</code> để lưu kết quả của các lần thử. Variable <code class="language-plaintext highlighter-rouge">WINS</code> để lưu số lượt thắng. Variable <code class="language-plaintext highlighter-rouge">STRATEGY</code> để lưu chiến thuật mà người chơi chọn:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c1"># List để lưu lại các kết quả
+</span><span class="n">RESULTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Variable lưu lại số lượt thắng
+</span><span class="n">WINS</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Strategy (chiến thuật) 0: giữ nguyên lựa chọn ban đầu.
+# strategy (chiến thuật) 1: đổi cửa.
+</span><span class="n">STRATEGY</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Bây giờ chúng ta sẽ vào phần chính và mô phỏng trò chơi. Đầu tiên tạo một variable để lưu số lượt thử. Các bạn có thể tùy chỉnh số lượt thử theo mong muốn của mình:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c1"># Số lượt thử
+</span><span class="n">TEST_SAMPLE</span> <span class="o">=</span> <span class="mi">100000</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta sẽ lặp lại trò chơi (<code class="language-plaintext highlighter-rouge">TEST_SAMPLE</code>) lần bằng vòng for loop và lưu lại kết quả của mỗi lượt. Trong mỗi lượt chơi, chúng ta sẽ thực hiện 5 bước đã đề cập ở trên:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TEST_SAMPLE</span><span class="p">):</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Variable <code class="language-plaintext highlighter-rouge">result</code> ở đây dùng để lưu lại kết quả của mỗi mỗi lượt chơi:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># Variable lưu lại kết quả của mỗi lượt.
+</span>   <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>Bước 1</strong>: chọn ra một cửa đúng, việc này giống như chúng ta đang xáo trộn vị trí của các cánh cửa. Ở đây chúng ta sẽ dùng hàm <code class="language-plaintext highlighter-rouge">choose()</code> được tạo ở trên để mô phỏng việc đó:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># Chọn ngẫu nhiên một cửa đúng.
+</span>   <span class="n">correct_door</span> <span class="o">=</span> <span class="n">choose</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>Bước 2</strong>: người chơi chọn một cánh cửa ngẫu nhiên. Chúng ta lại dùng hàm <code class="language-plaintext highlighter-rouge">choose()</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># Người chơi chọn một cửa.
+</span>   <span class="n">first_choice</span> <span class="o">=</span> <span class="n">choose</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>Bước 3</strong>: MC sẽ mở ra một cửa sai. LƯU Ý: MC sẽ luôn mở ra cửa sai và khác với lựa chọn của người chơi. Vì vậy chúng ta dùng hàm <code class="language-plaintext highlighter-rouge">get_unchoosen_door()</code> đã tạo và thêm vào argument là một list gồm lựa chọn đầu tiên của người chơi và cánh cửa đúng <code class="language-plaintext highlighter-rouge">[first_choice, correct_door]</code>. Hàm <code class="language-plaintext highlighter-rouge">get_unchoosen_door()</code> sẽ loại bỏ những lựa chọn trong list đó và trả lại cánh cửa còn lại:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># MC mở một ra một cửa sai.
+</span>   <span class="c1"># Lưu ý: mc luôn mở ra cửa sai và không phải là cửa người chơi đã chọn.
+</span>   <span class="n">incorrect_door</span> <span class="o">=</span> <span class="n">get_unchoosen_door</span><span class="p">([</span><span class="n">first_choice</span><span class="p">,</span> <span class="n">correct_door</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta thêm lựa chọn của người chơi, MC, cửa đúng vào variable <code class="language-plaintext highlighter-rouge">result</code> để lưu lại. Ở đây có dùng một tính năng rất hay trong python đó là <strong>template string</strong> để chèn các dữ liệu vào giữa một string mà không cần cộng các string lại. Để sử dụng <strong>template string</strong>, ta thêm chữ “<code class="language-plaintext highlighter-rouge">f</code>” đằng trước một string bình thường; các biến được chèn thêm sẽ được đặt trong <code class="language-plaintext highlighter-rouge">{}</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># Lưu lại lựa chọn.
+</span>   <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s">"1st choice: </span><span class="si">{</span><span class="n">first_choice</span><span class="si">}</span><span class="s"> | incorrect door: </span><span class="si">{</span><span class="n">incorrect_door</span><span class="si">}</span><span class="s"> | correct door: </span><span class="si">{</span><span class="n">correct_door</span><span class="si">}</span><span class="s">"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>Bước 4</strong>: Người chơi có quyền chọn lại cửa hoặc giữ nguyên lựa chọn ban đầu. Nếu dùng chiến thuật đổi cửa, chúng ta lại sử dụng hàm <code class="language-plaintext highlighter-rouge">get_unchoosen_door()</code> để chọn một cánh cửa khác với lựa chọn ban đầu và cánh cửa sai do MC mở (<code class="language-plaintext highlighter-rouge">[first_choice, incorrect_door]</code>). Nếu không, người chơi sẽ giữ nguyên cửa ban đầu. Ta lưu lựa chọn này lại vào variable <code class="language-plaintext highlighter-rouge">result</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>   <span class="k">if</span> <span class="n">STRATEGY</span><span class="p">:</span>
+       <span class="c1"># Nếu chọn chiến thuật 1 người chơi sẽ đổi cửa.
+</span>       <span class="n">final_choice</span> <span class="o">=</span> <span class="n">get_unchoosen_door</span><span class="p">([</span><span class="n">first_choice</span><span class="p">,</span> <span class="n">incorrect_door</span><span class="p">])</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s">" | final choice: </span><span class="si">{</span><span class="n">final_choice</span><span class="si">}</span><span class="s">"</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="c1"># Nếu chọn chiến thuật 0 người chơi sẽ giữ nguyên lựa chọn ban đầu.
+</span>       <span class="n">final_choice</span> <span class="o">=</span> <span class="n">first_choice</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | final choice: unchanged"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>Bước 5</strong>: Kiểm tra người chơi có chọn đúng cửa hay không và lưu lại kết quả:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>   <span class="k">if</span> <span class="n">final_choice</span> <span class="o">==</span> <span class="n">correct_door</span><span class="p">:</span>
+       <span class="c1"># Nếu người chơi chọn đúng cửa, tăng số lượt thắng lên 1
+</span>       <span class="n">WINS</span> <span class="o">+=</span> <span class="mi">1</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | result: win"</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | result: lose"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Thêm kết quả của lượt chơi này vào <strong>list</strong> các kết quả:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>   <span class="c1"># Thêm kết quả của lượt chơi vào list các kết quả
+</span>   <span class="n">RESULTS</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Vậy là chúng ta đã hoàn thành việc mô phỏng trò chơi, tiếp theo chúng ta sẽ in ra kết quả nhận được.</p>
+
+<p>Tạo một vòng <strong>for loop</strong> với số loop tùy ý các bạn để in ra các kết quả:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c1"># In ra một số kết quả mẫu
+</span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">RESULTS</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta cũng có thể in ra thêm một số thông tin tổng hợp. Ở đây cũng có một tính năng hữu ích của <strong>Python</strong> đó là inline <code class="language-plaintext highlighter-rouge">if else</code>. Cấu trúc inline <code class="language-plaintext highlighter-rouge">if else</code> như sau:</p>
+
+<p>*<code class="language-plaintext highlighter-rouge">(kết quả nếu điều kiện đúng)* if *(điều kiện)* else *(kết quả nếu điều kiện sai)*</code></p>
+
+<p>Tính năng này rất hữu ích trong các trường hợp bạn cần trả lại một kết quả nhanh với điều kiện đơn giản:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c1"># In ra tổng kết.
+</span><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Test sample: </span><span class="si">{</span><span class="n">TEST_SAMPLE</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Strategy: </span><span class="si">{</span><span class="n">STRATEGY</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="s">'change door when offered'</span> <span class="k">if</span> <span class="n">STRATEGY</span> <span class="k">else</span> <span class="s">'do not change door when offered'</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Wins: </span><span class="si">{</span><span class="n">WINS</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Winning probability: </span><span class="si">{</span><span class="n">WINS</span> <span class="o">/</span> <span class="n">TEST_SAMPLE</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Bây giờ chỉ còn bước chạy thôi :))</p>
+
+<p>Các bạn nhớ chỉnh variable <code class="language-plaintext highlighter-rouge">STRATEGY</code> (chiến thuật) để xem kết quả nhé:</p>
+
+<p>Đúng theo dự đoán, nếu người chơi <strong>giữ nguyên</strong> lựa chọn ban đầu của mình và <strong>không thay đổi</strong> cửa thì tỷ lệ thắng sẽ là <strong>1/3</strong>:</p>
+
+<p><img src="/assets/images/posts/monty-hall/nosw.png" alt="Kết quả khi không đổi cửa" /></p>
+
+<p>Còn nếu người người chơi <strong>chọn lại cánh cửa khác</strong> thì tỷ lệ thắng là <strong>2/3</strong>:</p>
+
+<p><img src="/assets/images/posts/monty-hall/sw.png" alt="Kết quả khi đổi cửa" /></p>
+
+<p>Như vậy là chúng ta đã hoàn thành việc “test thử” <strong>Monty Hall</strong> có đúng không. Các bạn hãy thoải mái chỉnh sửa code theo ý mình nhé và xem kết quả sẽ thay đổi như nào nhé. Một gợi ý nhỏ: chương trình ở trên, MC luôn chọn cửa <strong>sai</strong> và <strong>khác</strong> với lựa chọn của người chơi; nếu người chơi <strong>chọn cửa sai</strong> và MC <strong>mở cửa đó</strong> thì tỷ lệ thắng khi người chơi chọn lại cửa là bao nhiêu? Mọi người hãy thử chỉnh sửa code và tìm ra kết quả nhé.</p>
+
+<p>Qua bài viết này, <strong>UCC</strong> mong mọi người có thể tìm được những mục đích sáng tạo để sử dụng <strong>Python</strong>: có thể là “test thử” một câu đố nào đó, …. Mong mọi người có thể thấy <strong>Python</strong> không chỉ dùng để viết những thuật toán nhàm chán :( mà còn là công cụ hữu ích trong mọi việc.</p>
+
+<p>Dưới đây là <strong>code</strong> đầy đủ:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+</pre></td><td class="rouge-code"><pre><span class="c1"># Import thư viện random.
+</span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Chọn một cửa ngẫu nhiên số từ 1 -&gt; 3.
+</span><span class="k">def</span> <span class="nf">choose</span><span class="p">():</span>
+   <span class="k">return</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Chọn một cửa ngẫu nhiên trong những cửa chưa được chọn.
+</span><span class="k">def</span> <span class="nf">get_unchoosen_door</span><span class="p">(</span><span class="n">chosen_doors</span><span class="p">):</span>
+   <span class="n">doors_selection</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+   <span class="c1"># Loại bỏ những cửa đã chọn.
+</span>   <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">chosen_doors</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">doors_selection</span><span class="p">:</span>
+           <span class="n">doors_selection</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+
+   <span class="c1"># Nếu có một cửa chưa được chọn thì chọn cửa đó. Nếu không chọn ngẫu nhiên 1 trong 2 cửa còn lại.
+</span>   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">doors_selection</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">doors_selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">doors_selection</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1"># List để lưu lại các kết quả
+</span><span class="n">RESULTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Variable lưu lại số lượt thắng
+</span><span class="n">WINS</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Strategy (chiến thuật) 0: giữ nguyên lựa chọn ban đầu.
+# strategy (chiến thuật) 1: đổi cửa.
+</span><span class="n">STRATEGY</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Số lượt thử
+</span><span class="n">TEST_SAMPLE</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TEST_SAMPLE</span><span class="p">):</span>
+   <span class="c1"># Variable lưu lại kết quả của mỗi lượt.
+</span>   <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+
+   <span class="c1"># Chọn ngẫu nhiên một cửa đúng.
+</span>   <span class="n">correct_door</span> <span class="o">=</span> <span class="n">choose</span><span class="p">()</span>
+
+   <span class="c1"># Người chơi chọn một cửa.
+</span>   <span class="n">first_choice</span> <span class="o">=</span> <span class="n">choose</span><span class="p">()</span>
+
+   <span class="c1"># MC mở một ra một cửa sai.
+</span>   <span class="c1"># Lưu ý: mc luôn mở ra cửa sai và không phải là cửa người chơi đã chọn.
+</span>   <span class="n">incorrect_door</span> <span class="o">=</span> <span class="n">get_unchoosen_door</span><span class="p">([</span><span class="n">first_choice</span><span class="p">,</span> <span class="n">correct_door</span><span class="p">])</span>
+
+   <span class="c1"># Lưu lại lựa chọn.
+</span>   <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s">"1st choice: </span><span class="si">{</span><span class="n">first_choice</span><span class="si">}</span><span class="s"> | incorrect door: </span><span class="si">{</span><span class="n">incorrect_door</span><span class="si">}</span><span class="s"> | correct door: </span><span class="si">{</span><span class="n">correct_door</span><span class="si">}</span><span class="s">"</span>
+
+   <span class="k">if</span> <span class="n">STRATEGY</span><span class="p">:</span>
+       <span class="c1"># Nếu chọn chiến thuật 1 người chơi sẽ đổi cửa.
+</span>       <span class="n">final_choice</span> <span class="o">=</span> <span class="n">get_unchoosen_door</span><span class="p">([</span><span class="n">first_choice</span><span class="p">,</span> <span class="n">incorrect_door</span><span class="p">])</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s">" | final choice: </span><span class="si">{</span><span class="n">final_choice</span><span class="si">}</span><span class="s">"</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="c1"># Nếu chọn chiến thuật 0 người chơi sẽ giữ nguyên lựa chọn ban đầu.
+</span>       <span class="n">final_choice</span> <span class="o">=</span> <span class="n">first_choice</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | final choice: unchanged"</span>
+
+   <span class="k">if</span> <span class="n">final_choice</span> <span class="o">==</span> <span class="n">correct_door</span><span class="p">:</span>
+       <span class="c1"># Nếu người chơi chọn đúng cửa, tăng số lượt thắng lên 1
+</span>       <span class="n">WINS</span> <span class="o">+=</span> <span class="mi">1</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | result: win"</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="s">" | result: lose"</span>
+
+   <span class="c1"># Thêm kết quả của lượt chơi vào list các kết quả
+</span>   <span class="n">RESULTS</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># In ra một số kết quả mẫu
+</span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">RESULTS</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+
+<span class="c1"># In ra tổng kết.
+</span><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Test sample: </span><span class="si">{</span><span class="n">TEST_SAMPLE</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Strategy: </span><span class="si">{</span><span class="n">STRATEGY</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="s">'change door when offered'</span> <span class="k">if</span> <span class="n">STRATEGY</span> <span class="k">else</span> <span class="s">'do not change door when offered'</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Wins: </span><span class="si">{</span><span class="n">WINS</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Winning probability: </span><span class="si">{</span><span class="n">WINS</span> <span class="o">/</span> <span class="n">TEST_SAMPLE</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><a href="/assets/code/test.py">test.py</a></p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-03-13">13 Mar 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#math">math</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#python">python</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#coding">#coding</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#probability">#probability</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//phan-biet-compiler-va-interpreter/">Phân biệt Compiler và Interpreter &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

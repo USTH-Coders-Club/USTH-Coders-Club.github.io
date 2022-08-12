@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Đầu tiên, UCC xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo Discord Music Bot vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, UCC sẽ có một series blog về cách hướng dẫn tạo một con bot có thể chơi nhạc trên Discord vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách cài đặt môi trường* để con bot Discord có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể inbox trực tiếp fanpage của UCC để hỏi, chúng mình luôn sẵn sàng giải đáp các thắc mắc của bạn." />
+<meta property="og:description" content="Đầu tiên, UCC xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo Discord Music Bot vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, UCC sẽ có một series blog về cách hướng dẫn tạo một con bot có thể chơi nhạc trên Discord vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách cài đặt môi trường* để con bot Discord có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể inbox trực tiếp fanpage của UCC để hỏi, chúng mình luôn sẵn sàng giải đáp các thắc mắc của bạn." />
+<link rel="canonical" href="https://usth-coders-club.github.io/discord-music-bot-1/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/discord-music-bot-1/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets/images/posts/2022-04-29-discord-music-bot-1/banner.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets/images/posts/2022-04-29-discord-music-bot-1/banner.jpg" />
+<meta property="twitter:title" content="[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-29T00:00:00+00:00","datePublished":"2022-04-29T00:00:00+00:00","description":"Đầu tiên, UCC xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo Discord Music Bot vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, UCC sẽ có một series blog về cách hướng dẫn tạo một con bot có thể chơi nhạc trên Discord vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách cài đặt môi trường* để con bot Discord có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể inbox trực tiếp fanpage của UCC để hỏi, chúng mình luôn sẵn sàng giải đáp các thắc mắc của bạn.","headline":"[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường","image":"https://usth-coders-club.github.io/assets/images/posts/2022-04-29-discord-music-bot-1/banner.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/discord-music-bot-1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/discord-music-bot-1/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường&url=https://usth-coders-club.github.io/discord-music-bot-1/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/discord-music-bot-1/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/discord-music-bot-1/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/kurisu.jpg" alt="Phạm Đức Khiêm">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Phạm Đức Khiêm</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/posts/2022-04-29-discord-music-bot-1/banner.jpg" alt="[CODE MUSIC BOT FOR DISCORD] - Phần 1: Cài đặt môi trường">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#cài-đặt-nodejs">Cài đặt Node.js</a></li>
+  <li class="tocp"><a href="#cài-đặt-các-module-cần-thiết">Cài đặt các module cần thiết</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Đầu tiên, <strong>UCC</strong> xin chân thành cảm ơn các bạn đã quan tâm và tham gia buổi Seminar tạo <strong>Discord Music Bot</strong> vừa qua. Có lẽ sẽ có nhiều bạn chưa thể tham gia hay vẫn còn cảm thấy chưa rõ về buổi Seminar đó. Hôm nay, <strong>UCC</strong> sẽ có một <strong>series blog</strong> về cách hướng dẫn tạo một con bot có thể chơi nhạc trên <strong>Discord</strong> vô cùng chi tiết. Ở bài blog đầu tiên này mình sẽ hướng dẫn các bạn cách <strong>cài đặt môi trường</strong> để con <strong>bot Discord</strong> có thể chạy trên máy tính của bạn. À, nếu có gì vẫn còn băn khoăn thì bạn có thể <strong>inbox</strong> trực tiếp <a href="https://www.facebook.com/USTH.Coders.Club">fanpage của UCC</a> để hỏi, chúng mình luôn <strong>sẵn sàng giải đáp</strong> các thắc mắc của bạn.</p>
+
+<h2 id="cài-đặt-nodejs">Cài đặt Node.js</h2>
+
+<p>Vì ngôn ngữ mình sử dụng là <strong>JavaScript</strong>, nên trước khi code bot mình sẽ tiến hành cài <strong>Node.js</strong>. <strong>Node.js</strong> là một môi trường độc lập giúp bạn có thể thực hiện chạy code <strong>JavaScript</strong> bên ngoài trình duyệt. Để cài đặt <strong>Node.js</strong> bạn truy cập website <a href="http://nodejs.org">nodejs.org</a> và chọn bản <strong>LTS</strong> (<strong>long-term support</strong>) bởi đây là phiên bản <strong>ổn định nhất</strong>.</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/nodejsdownload.png" alt="nodejsdownload.png" /></p>
+
+<p>Sau khi đã tải về, bạn mở nó lên và tiến hành cài đặt như từng bước như hình:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install1.png" alt="install1.png" /></p>
+
+<blockquote>
+  <p>Các bạn bấm <strong>Next</strong> để tiếp tục</p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install2.png" alt="install2.png" /></p>
+
+<blockquote>
+  <p>Tích vào ô chấp nhận điều khoản rồi tiếp tục bấm <strong>Next</strong></p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install3.png" alt="install3.png" /></p>
+
+<blockquote>
+  <p>Chọn vị trí nơi bạn muốn lưu rồi tiếp tục bấm <strong>Next</strong></p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install4.png" alt="install4.png" /></p>
+
+<blockquote>
+  <p>Đoạn này bạn tiếp tục bấm <strong>Next</strong></p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install5.png" alt="install5.png" /></p>
+
+<blockquote>
+  <p>Bạn có thể tích vào ô trên để cài đặt một số công cụ khác (<em>Optional</em>). Rồi bạn bấm <strong>Next</strong> để tiếp tục.</p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install6.png" alt="install6.png" /></p>
+
+<blockquote>
+  <p>Bấm <strong>Install</strong> để bắt đầu cài đặt</p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install7.png" alt="install7.png" /></p>
+
+<blockquote>
+  <p>Bạn đợi một lúc để chương trình cài đặt.</p>
+
+</blockquote>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install8.png" alt="install8.png" /></p>
+
+<blockquote>
+  <p>Bấm <strong>Finish</strong> để hoàn tất cài đặt.</p>
+
+</blockquote>
+
+<p>Để kiểm tra xem đã cài đặt thành công chưa, bạn mở <strong>PowerShell</strong> và nhập <strong><code class="language-plaintext highlighter-rouge">node -v</code></strong> để kiểm tra phiên bản <strong>Nodejs</strong>. Nếu nó hiện đúng phiên bản thì bạn đã cài đặt thành công.</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/install_success.png" alt="install_success.png" /></p>
+
+<h2 id="cài-đặt-các-module-cần-thiết">Cài đặt các module cần thiết</h2>
+
+<p>Sau khi đã cài thành công Nodejs, tiếp theo chúng ta sẽ đến phần cài đặt các module cần thiết để code con bot. Giống như C hay Python chúng ta được học ở trường cần phải khai báo một số thư viện như <strong>stdio.h</strong>, <strong>math.h</strong> hoặc <strong>pygame</strong>, con bot của chúng ta cũng yêu cầu một số <strong>module</strong> để có thể hoạt động được. Trước tiên bạn hãy tạo một folder để chứa các file code (<strong>Lưu ý</strong>: tên folder không được để có dấu).</p>
+
+<p>Ví dụ mình tạo một folder tên <strong>DiscordBot</strong> như trong ảnh:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/mkdir.png" alt="mkdir.png" /></p>
+
+<p>Để mở <strong>PowerShell</strong> tại đúng folder mình code, bạn chỉ cần nhập “<strong>powershell</strong>” tại ô địa chỉ folder:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/open_pws.png" alt="open_pws.png" /></p>
+
+<p>Tiếp theo chúng ta sẽ tiến hành cài các modules. Đầu tiên nhập lệnh <strong><code class="language-plaintext highlighter-rouge">npm init</code></strong> để tạo file package.json (đây là file chứa thông tin và các module của bạn). Bạn chỉ cần bấm <strong>Enter</strong> đến khi hiện giống trong hình dưới đây là ok:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/npm_init.png" alt="npm_init.png" /></p>
+
+<p>Tiếp đến bạn hãy nhập:</p>
+
+<p><code class="language-plaintext highlighter-rouge">npm install discord.js discord-player dotenv ffmpeg-static @discordjs/opus</code></p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-04-29-discord-music-bot-1/npm_install.png" alt="npm_install.png" /></p>
+
+<p>Câu lệnh trên sẽ tự động cài các modules:</p>
+
+<ul>
+  <li><strong>discord.js</strong>: cho phép bạn tương tác với Discord qua JavaScript</li>
+  <li><strong>discord-player</strong>: một framework hoàn chỉnh để đơn giản hóa lệnh phát nhạc qua discord.js</li>
+  <li><strong>dotenv</strong>: lấy dữ liệu trong file môi trường <strong>.env</strong></li>
+  <li><strong>ffmpeg-static</strong>: xử lý âm thanh</li>
+  <li><strong>@discordjs/opus</strong>: cũng là xử lý âm thanh luôn</li>
+</ul>
+
+<p>Vậy là chúng ta đã hoàn thành xong những bước đầu tiên bao gồm cài đặt môi trường cần thiết để một con bot Discord hoạt động. Ở bài viết tiếp theo, UCC sẽ hướng dẫn các bạn cách tạo ra con bot và làm nó chạy được bằng code. Và cuối cùng, nếu gặp lỗi hay khó khăn gì thì đừng ngần ngại, hãy inbox trực tiếp <a href="https://www.facebook.com/USTH.Coders.Club">fanpage UCC</a> nhé!</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-04-29">29 Apr 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#javascript">javascript</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#coding">#coding</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//viet-email-chuyen-nghiep/"> &laquo; Viết email một cách chuyên nghiệp</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//discord-music-bot-2/">[CODE MUSIC BOT FOR DISCORD] - Phần 2: Một số lệnh cơ bản &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

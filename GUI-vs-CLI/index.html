@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>So sánh GUI và CLI | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>So sánh GUI và CLI | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="So sánh GUI và CLI" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hệ điều hành là thứ đem lại sự tương tác tốt hơn giữa người dùng và thiết bị. Hệ điều hành cung cấp 2 giao diện chính giúp người dùng tương tác, đó là giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI). Người sử dụng giao diện đồ họa tương tác với thiết bị hoặc phần mềm qua các biểu tượng đồ họa trong khi giao diện dòng lệnh là được biểu thị bằng văn bản, ở đó người dùng nhập các câu lệnh để điều hướng và vận hành máy tính hoặc phần mềm. Trong bài viết này, UCC sẽ giúp bạn giải đáp các thắc mắc về khái niệm của giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI), chức năng hoạt động của mỗi cái, cách chúng hoạt động khác nhau như thế nào và khi nào nên sử dụng hai giao diện đó" />
+<meta property="og:description" content="Hệ điều hành là thứ đem lại sự tương tác tốt hơn giữa người dùng và thiết bị. Hệ điều hành cung cấp 2 giao diện chính giúp người dùng tương tác, đó là giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI). Người sử dụng giao diện đồ họa tương tác với thiết bị hoặc phần mềm qua các biểu tượng đồ họa trong khi giao diện dòng lệnh là được biểu thị bằng văn bản, ở đó người dùng nhập các câu lệnh để điều hướng và vận hành máy tính hoặc phần mềm. Trong bài viết này, UCC sẽ giúp bạn giải đáp các thắc mắc về khái niệm của giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI), chức năng hoạt động của mỗi cái, cách chúng hoạt động khác nhau như thế nào và khi nào nên sử dụng hai giao diện đó" />
+<link rel="canonical" href="https://usth-coders-club.github.io/GUI-vs-CLI/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/GUI-vs-CLI/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-05-13-GUI-vs-CLI%5Cbannerpost.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-05-13-GUI-vs-CLI%5Cbannerpost.png" />
+<meta property="twitter:title" content="So sánh GUI và CLI" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-13T00:00:00+00:00","datePublished":"2022-05-13T00:00:00+00:00","description":"Hệ điều hành là thứ đem lại sự tương tác tốt hơn giữa người dùng và thiết bị. Hệ điều hành cung cấp 2 giao diện chính giúp người dùng tương tác, đó là giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI). Người sử dụng giao diện đồ họa tương tác với thiết bị hoặc phần mềm qua các biểu tượng đồ họa trong khi giao diện dòng lệnh là được biểu thị bằng văn bản, ở đó người dùng nhập các câu lệnh để điều hướng và vận hành máy tính hoặc phần mềm. Trong bài viết này, UCC sẽ giúp bạn giải đáp các thắc mắc về khái niệm của giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI), chức năng hoạt động của mỗi cái, cách chúng hoạt động khác nhau như thế nào và khi nào nên sử dụng hai giao diện đó","headline":"So sánh GUI và CLI","image":"https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-05-13-GUI-vs-CLI%5Cbannerpost.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/GUI-vs-CLI/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/GUI-vs-CLI/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=So sánh GUI và CLI&url=https://usth-coders-club.github.io/GUI-vs-CLI/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/GUI-vs-CLI/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/GUI-vs-CLI/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/rengoku-ava.png" alt="Phạm Minh Hiếu">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Phạm Minh Hiếu</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="https://www.gravatar.com/avatar/?s=250&d=mm&r=x" alt="Văn Quốc An">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Văn Quốc An</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">So sánh GUI và CLI</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets\images\posts\2022-05-13-GUI-vs-CLI\bannerpost.png" alt="So sánh GUI và CLI">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#1-so-sánh-tổng-quan">1. So sánh tổng quan</a>
+    <ul>
+      <li class="tocp"><a href="#11-khái-niệm-giao-diện-đồ-họa-gui">1.1 Khái niệm giao diện đồ họa (GUI)</a></li>
+      <li class="tocp"><a href="#12-khái-niệm-giao-diện-dòng-lệnh-cli">1.2 Khái niệm giao diện dòng lệnh (CLI)</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#2-chức-năng-hoạt-động">2. Chức năng hoạt động</a></li>
+  <li class="tocp"><a href="#3-độ-thuận-tiện">3. Độ thuận tiện</a></li>
+  <li class="tocp"><a href="#4-tốc-độ-làm-việc">4. Tốc độ làm việc</a>
+    <ul>
+      <li class="tocp"><a href="#41-ui">4.1 UI</a></li>
+      <li class="tocp"><a href="#42-cli">4.2 CLI</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#5-tốc-độ-hoàn-thiện">5. Tốc độ hoàn thiện</a></li>
+  <li class="tocp"><a href="#6-khi-nào-và-tại-sao-nên-dùng-gui-và-cli">6. Khi nào và tại sao nên dùng GUI và CLI</a>
+    <ul>
+      <li class="tocp"><a href="#61-đối-với-giao-diện-đồ-họa-gui">6.1 Đối với giao diện đồ họa (GUI)</a></li>
+      <li class="tocp"><a href="#62-đối-với-giao-diện-dòng-lệnh-cli">6.2 Đối với giao diện dòng lệnh (CLI)</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#7-kết-luận">7. Kết luận</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Hệ điều hành là thứ đem lại sự tương tác tốt hơn giữa người dùng và thiết bị. Hệ điều hành cung cấp 2 giao diện chính giúp người dùng tương tác, đó là <strong>giao diện đồ họa (GUI)</strong> và <strong>giao diện dòng lệnh (CLI)</strong>. Người sử dụng giao diện đồ họa tương tác với thiết bị hoặc phần mềm qua các biểu tượng đồ họa trong khi giao diện dòng lệnh là được biểu thị bằng văn bản, ở đó người dùng nhập các câu lệnh để điều hướng và vận hành máy tính hoặc phần mềm.</p>
+
+<p>Trong bài viết này, <strong>UCC</strong> sẽ giúp bạn giải đáp các thắc mắc về khái niệm của giao diện đồ họa (GUI) và giao diện dòng lệnh (CLI), chức năng hoạt động của mỗi cái, cách chúng hoạt động khác nhau như thế nào và khi nào nên sử dụng hai giao diện đó</p>
+
+<h2 id="1-so-sánh-tổng-quan">1. So sánh tổng quan</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Giao diện đồ họa (Graphical User Interface)</th>
+      <th>Giao diện dòng lệnh(Command Line Interface)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Phương thức hoạt động</td>
+      <td>Giao diện dựa trên đồ họa, giúp người dùng giao tiếp với máy tính thông qua đồ họa trức quan như biểu tượng, nút,…</td>
+      <td>Giao diện dựa trên văn bản ,giúp người dùng giao tiếp với may thông qua nhập lệnh văn bản, code, script</td>
+    </tr>
+    <tr>
+      <td>Yêu cầu thiết bị</td>
+      <td>GUI yêu cầu người dùng có chuột và bàn phím</td>
+      <td>CLI chỉ yêu cầu người dùng có bàn phím</td>
+    </tr>
+    <tr>
+      <td>Độ phức tạp</td>
+      <td>Dễ dàng sử dụng vì có giao diện đồ họa và không cần ghi nhớ câu lệnh</td>
+      <td>Khó sử dụng vì cần ghi nhớ câu lệnh</td>
+    </tr>
+    <tr>
+      <td>Đối tượng hướng đến</td>
+      <td>Người dùng máy tính bình thường</td>
+      <td>Lập trình viên,chuyên viên quản trị mạng, cơ sở dữ liệu,…</td>
+    </tr>
+    <tr>
+      <td>Tốc độ làm việc</td>
+      <td>Giao diện đồ hoa thường sử dụng chuột để thao tác nên thường chậm hơn</td>
+      <td>Giao diện dòng lệnh sử dụng bàn phím nên thao tác làm việc nhanh hơn</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="11-khái-niệm-giao-diện-đồ-họa-gui"><strong>1.1 Khái niệm giao diện đồ họa (GUI)</strong></h3>
+
+<p>Giao diện đồ họa (<strong>Graphical User Interface</strong> hay <strong>GUI</strong>) là một dạng giao diện cho phép người dùng tương tác với máy tính hoặc thiết bị điện tử thông qua các hình ảnh, biểu tượng đồ họa hoặc chỉ báo âm thanh thay vì giao diện ngôn ngữ, câu lệnh hoặc điều hướng văn bản. Được phát triển vào những năm 70 của thế kỷ trước và triển khai thương mại hóa trên máy tính Macintosh của Apple (Hệ điều hành MacOS) và hệ điểu hành Windows với mục đích giải quyết vấn đề về hiệu quả sử dụng cho người dùng thông thường. Giao diện đồ họa trở thành chuẩn mực trong thiết kế lấy người dùng làm trung tâm của lập trình ứng dụng, cung cấp cho người dùng khả năng điều hành máy tính thông qua hình ảnh đồ họa như nút bấm, thành trượt, cửa sổ và con trỏ chuột.</p>
+
+<h3 id="12-khái-niệm-giao-diện-dòng-lệnh-cli">1.2 Khái niệm giao diện dòng lệnh (CLI)</h3>
+
+<p>Giao diện dòng lệnh (<strong>Command Line Interface</strong> hay <strong>CLI</strong>) là giao diện được thiết kế để người sử dụng có thể ra mệnh lệnh cho máy tính thực hiện chỉ bằng bàn phim thông qua các câu lệnh. Giao diện này cho phép người dùng thao tác viết các lệnh trong cửa sổ console hoặc terminal để có thể giao tiếp với hệ thống máy tính. Giao diện dòng lệnh có độ chính xác cực cao và nghiêm ngặt vì là do tự bản thân người dùng sử dụng bàn phím để gõ ra, người dùng bắt buộc phải gõ lệnh hoặc tự tạo lệnh cho mình để thực hiện thành công một tác vụ nào đó. Chương trình với giao diện dòng lệnh thường dễ dàng tự động hóa hơn. Một số hệ thống phần mềm triển khai thực hiện giao diện dòng lệnh để điều khiển và vận hành, bao gồm lập trình môi trường và các chương trình tiện ích.</p>
+
+<h2 id="2-chức-năng-hoạt-động">2. Chức năng hoạt động</h2>
+
+<p>Với những hệ thống hoạt động song song với nhau trong một hệ điều hành, sự liên kết của những phần mềm được liên kết một cách chặt chẽ. Tuy vậy, cái nhìn đầu tiên của đại đa số những người dùng hiện nay là con chuột, emoji và những ứng dụng đồ họa cao cấp. So với thế kỷ trước đây, chất lượng của LED - thứ tạo nên màn hình của chúng ta hiện nay - đã vượt lên rất nhiều lần nhằm cải thiện hiệu năng và sắc nét của hình ảnh nói chung. Cộng với sự phát triển của kinh tế số và công nghệ 4.0 ngày nay, việc di dời các hệ thống lỗi thời cũng đã mang đến sự tiếp nhận của mọi người với giao diện tương tác đồ họa (GUI).</p>
+
+<p>Chính vì vậy, bạn có thể thấy GUI ở khắp mọi nơi - <em>kể từ ti vi, máy giặt, tủ lạnh, điều hòa đến những hệ thống cao cấp như cơ sở dữ liệu, phần mềm bán hàng hoặc hệ thống quản lý hành trình</em> - tất cả những sản phẩm trên được quản lý một cách đơn giản và dễ hiểu cho mọi người, đặc biệt trong các tác vụ yêu cầu sự chuẩn xác và tính lặp lại của công việc. Đặc biệt, sự phát triển của Internet ngày nay đã làm cho trình duyệt Web như Google Chrome hoặc Firefox là một phàn thiết yếu của xã hội. Từ đó, bạn có thể thấy GUI chính là cái nhìn đầu tiên khi mọi người nhìn thấy về công nghệ đó - đẹp mắt, dễ hiểu và đơn giản.</p>
+
+<p>Tuy vậy, những biểu tượng này không thể hoạt động được khi không có sự trợ giúp của <em>backend</em> - một hệ thống ngầm quản lý cho tất cả những yêu cầu của bạn. Chắc hẳn rằng, bạn đã gặp phải những trường hợp như:</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-1.png" alt="img-1.png" /></p>
+
+<p>Hoặc, thi thoảng các bạn thấy những người sửa chữa máy tính thường mang tính “hacker”:</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-2.png" alt="img-2.png" /></p>
+
+<p>Những thứ tưởng chừng gây hoang mang và khó hiểu này, thực chất nó vô cùng quan trọng với máy tính của bạn. Đó là các hệ thống mã lệnh (CLI) mà thi thoảng chúng ta, những người coder thường xuyên gặp phải. Mặc dù không có tính họa mĩ như GUI, nhưng chức năng của chúng là vô tận - từ việc giúp bạn <strong>xử lý những commit cho công việc, khởi tạo dự án hoặc framework đến truy hồi dữ liệu bị mất sau khi xóa</strong> - chúng ở đằng sau tấm màn hệ điều hành để chờ đợi một công việc quan trong sắp tới. Hơn nữa, với một developer hiện nay, việc sử dụng các API là điều hoàn toàn cần thiết - và từ đó CLI xuất hiện như một công cụ đơn giản để chúng ta kết nối thành những hệ thống cao cấp hơn mà không tốn thời gian và giá trị.</p>
+
+<h2 id="3-độ-thuận-tiện">3. Độ thuận tiện</h2>
+
+<p>Với GUI, ứng dụng có nhiều hình tượng, nhiều bộ mặt và dáng vẻ.</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-3.png" alt="img-3.png" /></p>
+
+<p><a href="https://www.facebook.com/">Một profile trên Facebook</a></p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-4.jpg" alt="img-4.jpg" /></p>
+
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-5.png" alt="img-5.png" /></p>
+
+<p><a href="https://github.com/rashlight/Final-Project-Python">Một phần mềm quản lý điện cho doanh nghiệp</a></p>
+
+<p>Với mỗi người dùng công nghệ, trải nghiệm sử dụng của một sản phẩm công nghệ là cái cốt lõi cho số lượng người dùng của bạn - với họ, sự tiện nghi luôn đặt lên hàng đầu. GUI không chỉ là một nơi để họ có thể thực hiện công việc - nó cần phải tránh được sự phức tạp và khó hiểu cho những công việc đơn giản thường ngày.</p>
+
+<p>Do vậy, độ nhất quán của giao diện là yếu tố quan trọng để làm cho GUI có sự nổi tiếng với người dùng hiện nay, và chính vì thế khoảng tiện ích cũng bao quát từ thoải mái đến khó chịu. Một ví dụ điển hình là cách để thêm máy in vào hệ thống, với Windows:</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\printer1.png" alt="printer1.png" /></p>
+
+<p>Và với Linux:</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\printerr.png" alt="printerr.png" /></p>
+
+<p>Với Windows, biểu thị máy in được hiện rõ ràng bằng dấu cộng và dòng chữ “Add a printer or scanner”. Cách thức này cũng được thực hiện trên Linux, tuy vậy các thuật ngữ như LPT, URI hoặc SAMBA sẽ mang đến sự hoang mang cho người dùng nếu không được hướng dẫn cụ thể.</p>
+
+<p>Trái ngược với GUI, CLI được quản lý một cách đơn giản hơn - chữ trắng trong nền đen, nên sự tiện nghi được nhất quán theo hướng dùng của mỗi người - bạn hoặc thích hoặc không thích hẳn. Tuy vậy, có thể thấy được nhiều ngoại lệ, nhất là những hệ điều hành UNIX như MacOS hay Linux sử dụng Unicode để trải nghiệm sự dụng đẹp gần như GUI, cho phép người dùng tùy chỉnh tông màu, phông chữ, v.v.</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\img-last.png" alt="img-last.png" /></p>
+
+<p><a href="https://github.com/dylanaraps/neofetch">neofetch, một công cụ xử lý thông tin của phần cứng máy tính</a></p>
+
+<p>Đặc biệt, sự tiện nghi của CLI so với thời trước đã được cải thiện khá rõ rệt, thậm chí có thể nhanh hơn với các dụng cụ hỗ trợ cho lập trình viên.</p>
+
+<p>Ví dụ, để cài một ứng dụng như MySQL bằng giao diện, chúng ta sẽ:</p>
+
+<ol>
+  <li>Tìm MySQL trên Google</li>
+  <li>Vào trang chủ</li>
+  <li>Tìm mục <em>” Download “</em> trong rất nhiều các mục khác</li>
+  <li>Trượt xuống cuối trang để tìm phím <em>“MySQL Community (GPL) Downloads “</em></li>
+  <li>Chọn tùy chọn trong danh sách (?)</li>
+  <li>Chọn bộ cài Web hoặc Offline</li>
+  <li>…</li>
+</ol>
+
+<p>Với CLI, chúng ta chỉ cần khởi động trình mã lệnh, và nhập</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">choco install mysql</code> cho Windows, hoặc</li>
+  <li><code class="language-plaintext highlighter-rouge">apt install mysql</code> cho Linux</li>
+</ul>
+
+<p>là xong.</p>
+
+<h2 id="4-tốc-độ-làm-việc">4. Tốc độ làm việc</h2>
+
+<p>Khi tốc độ là điều hiển nhiên, một câu hỏi được đặt ra là</p>
+
+<blockquote>
+  <p>“Sự đa dạng của GUI hay khả năng của CLI sẽ tốt hơn?”</p>
+
+</blockquote>
+
+<p>Để đánh giá được điểm này rất khó vì chính công việc và độ khó làm nên ý kiến của bạn, tuy vậy, chúng mình có thể đưa ra một số cái mạnh và điểm khuất của GUI và CLI như sau:</p>
+
+<h3 id="41-ui"><strong>4.1 UI</strong></h3>
+
+<ul>
+  <li>Khả năng diễn đạt của GUI là một điểm rất lớn - nó tạo cho người dùng một thói quen tương tác giống với việc lặp lại các động tác ngoài thực tế mà không cần kỹ năng chuyên ngành cao.</li>
+  <li>Tuy vậy, chính sự tương tác này có thể làm giảm thời gian hoạt động thông thường do việc kiểm soát dữ liệu không thể đảm bảo lớn bằng những phần mềm có cấu trúc đơn giản, mà đại đa số là các bộ mã lệnh - thể hiện cho tính tương đối của người dùng.</li>
+  <li>Hơn nữa, việc chạy một ứng dụng đồ họa chắc chắn sẽ ảnh hưởng đến hiệu năng do việc vẽ lên màn hình là một chức năng tốn kém, đặc biệt có thể phải sử dụng đến phần cứng chuyên biệt như card xử lý đồ họa (GPU). Tuy vậy, các máy tính hiện đại thời nay đều đa phần có GPU được đặt sẵn nên thời gian phản ứng của chúng có giảm bớt đôi chút.</li>
+</ul>
+
+<h3 id="42-cli">4.2 <strong>CLI</strong></h3>
+
+<ul>
+  <li>Chắc chắn ràng, các bộ thực thi lệnh có hiệu năng cao hơn so với GUI - thậm chí có một số trình soạn mã như <a href="https://alacritty.org/">Alacritty</a> hoặc <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a> cho phép người dùng sử dụng GPU thay thế, từ đó tăng tốc quá trình thực thi lệnh hơn.</li>
+  <li>Sự đặc biệt của hệ thống mã lệnh là tính tuyêt đối - tất cả các dữ liệu nhập vào đều trả ra các giá trị tương đương. Chính vì vậy, bạn có thể tạo ra các scriptlet - các file để thực thi các câu lệnh phức tạp một cách ngắn gọn, từ đó làm giảm công đoạn làm việc so với GUI.</li>
+  <li>Một điểm yếu khá rõ rệt của CLI nói chung chính là dữ liệu đầu vào phải rất chính xác và cụ thể. Một sai sót có thể làm cho tất cả bộ lệnh không chấp nhận dữ liệu và báo lỗi, từ đó gây mất thời gian xử lý các tác vụ.</li>
+</ul>
+
+<h2 id="5-tốc-độ-hoàn-thiện">5. Tốc độ hoàn thiện</h2>
+
+<p>Là một lập trình viên, chắc chắn bạn muốn phần mềm của mình được hoàn thiện nhanh và đẹp?</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>GUI có thể:</th>
+      <th>CLI có thể:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Giúp bạn có được giao diện mà bạn mong muốn bằng Design Framework</td>
+      <td>Tùy chỉnh cách nhìn của trình mã lệnh như màu sắc</td>
+    </tr>
+    <tr>
+      <td>Tương tác với người dùng một cách dễ dàng hơn</td>
+      <td>Cho người dùng của bạn sự tò mò và hiểu biết về máy tính</td>
+    </tr>
+    <tr>
+      <td>Đưa phần mềm của bạn đến nhiều góc độ sử dụng khác nhau</td>
+      <td>Thực hiện một công việc nhanh chóng và chính xác</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>GUI hạn chế:</th>
+      <th>CLI hạn chế:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Thời gian tạo ứng dụng dài và khả năng bug cao</td>
+      <td>Không hữu ích với người dùng thường, ngoại trừ một số trường hợp chuyên môn</td>
+    </tr>
+    <tr>
+      <td>Cần có hiểu biết về framework đồ họa</td>
+      <td>Cần có hiểu biết về API, syscall, các module bậc thấp, …</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-khi-nào-và-tại-sao-nên-dùng-gui-và-cli">6. Khi nào và tại sao nên dùng GUI và CLI</h2>
+
+<h3 id="61-đối-với-giao-diện-đồ-họa-gui">6.1 Đối với giao diện đồ họa (GUI)</h3>
+
+<p>Với người thường, việc sử dụng giao diện dòng lệnh đôi khi là không cần thiết vì nó đòi hỏi phải phải học hỏi, ghi nhớ dòng lệnh nên việc sử dụng giao diện đồ họa giúp bạn đỡ tốn dung luượng não và tiết kiệm thời gian cho việc học các dòng lệnh. Ngoài ra trong một số trường hợp, giao diện đồ họa cũng mang lại cho bạn trải nghiệm thẩm mỹ về thiết kế của sản phẩm. Đối với lập trình viên, việc sử dụng giao diện đô họa không phải là việc nên né tránh. Bản thân giao diện đồ họa được sinh ra để giảm bớt thời gian gõ bàn phím và tăng tuổi thọ của bàn phím nên bạn nên thông thái lựa chọn khi nào sử dụng giao diện đồ họa và giao diện câu lệnh.Việc sử dụng giao diện đồ họa nhiều có thể giúp cho các developer cụ thể là front-end developer, UI-UX designer hoặc software developer nói chung có khả năng hiểu thêm về trải nghiệm người dùng đối với giao diện đồ họa để giúp bản thân có thể thiết kế ra những giao diện đồ họa tốt hơn .</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\gui.png" alt="gui.png" /></p>
+
+<h3 id="62-đối-với-giao-diện-dòng-lệnh-cli">6.2 Đối với giao diện dòng lệnh (CLI)</h3>
+
+<p>Với người thường, giao diện dòng lệnh cho phép bạn thực hiện những thao tác mà giao diện đồ họa không thực hiện được .Ngoài ra nó còn giúp bạn hiểu thêm về cách mà lập trình viên làm việc với máy tính. Đối với lập trình viên,thời gian là quý báu nên việc sử dụng giao diện dòng lệnh là điều cần thiết, bạn có thể không cần dùng tới chuột do các thao tác di chuyển con trỏ, thay đổi cửa sổ làm việc hoàn toàn có thể thực hiện từ bàn phím. Tay phải của bạn sẽ không phải chuyển qua chuyển lại giữa bàn phím – chuột rồi lại chuột – bàn phím nữa, vừa nhìn chuyên nghiệp hơn mà lại tiết kiệm được kha khá thời gian trong công việc. Hầu hết các công cụ cho developer đa phần đều là giao diện dòng lệnh, ví dụ như: git, docker, npm,…. đều được ưu tiên sử dụng giao diện dòng lệnh đơn giản là vì sự nhanh chóng và tiện lợi. Ngoài ra nếu bạn có định hướng làm việc với server thì hầu hết các server thường sử dụng các phiên bản phân phối của Linux làm hệ điều hành và loại bỏ phần giao diện đồ họa nên việc hiểu và sử dụng thành thạo giao diện dòng lệnh là điều bắt buộc.</p>
+
+<p style="text-align: center;"><img src="\assets\images\posts\2022-05-13-GUI-vs-CLI\cli.png" alt="cli.png" /></p>
+
+<h2 id="7-kết-luận">7. Kết luận</h2>
+
+<p>Qua bài viết này, bọn mình mong các bạn có thể hiểu ra được sự khác biệt giữa giao diện đồ họa (graphical user interface) và giao diện dòng lệnh (command line interface) cũng như có thể ứng dụng những kiến thức trên vào trong học tập và công việc. Cảm ơn các bạn đã dành thời gian cho bài viết của bọn mình. Chúc các bạn có thời gian học lập trình vui vẻ và bổ ích.</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-05-13">13 May 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Operating-Systems">Operating Systems</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#CLI">#CLI</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#GUI">#GUI</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//discord-music-bot-3/"> &laquo; [CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//giai-bai-tap/">Làm thế nào để giải quyết các bài toán gặp phải khi lập trình? 🤔 &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

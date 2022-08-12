@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0 | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0 | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - OS Command Injection - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản 6.0. Lỗ hổng này đã được chương trình CVE của tập đoàn MITRE công nhận và gán cho mã định danh CVE-2022-29303 với điểm số mức độ nghiêm trọng là 9.8 CRITICAL, cho phép kẻ tấn công có thể chiếm quyền hệ thống." />
+<meta property="og:description" content="Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - OS Command Injection - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản 6.0. Lỗ hổng này đã được chương trình CVE của tập đoàn MITRE công nhận và gán cho mã định danh CVE-2022-29303 với điểm số mức độ nghiêm trọng là 9.8 CRITICAL, cho phép kẻ tấn công có thể chiếm quyền hệ thống." />
+<link rel="canonical" href="https://usth-coders-club.github.io/solar-view/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/solar-view/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-07-19-solar-view%5Cbanner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-07-19-solar-view%5Cbanner.png" />
+<meta property="twitter:title" content="Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-07-19T00:00:00+00:00","datePublished":"2022-07-19T00:00:00+00:00","description":"Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - OS Command Injection - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản 6.0. Lỗ hổng này đã được chương trình CVE của tập đoàn MITRE công nhận và gán cho mã định danh CVE-2022-29303 với điểm số mức độ nghiêm trọng là 9.8 CRITICAL, cho phép kẻ tấn công có thể chiếm quyền hệ thống.","headline":"Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0","image":"https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-07-19-solar-view%5Cbanner.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/solar-view/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/solar-view/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0&url=https://usth-coders-club.github.io/solar-view/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/solar-view/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/solar-view/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/picklerick.jpg" alt="Đỗ Nhật Thành">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="https://thanlanslab.wordpress.com/">Đỗ Nhật Thành</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets\images\posts\2022-07-19-solar-view\banner.png" alt="Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#giới-thiệu-về-solarview">Giới thiệu về SolarView</a></li>
+  <li class="tocp"><a href="#phân-tích-lỗ-hổng-trong-mã-nguồn-solarview-compact-60">Phân tích lỗ hổng trong mã nguồn SolarView Compact 6.0</a>
+    <ul>
+      <li class="tocp"><a href="#code-logic">Code Logic</a></li>
+      <li class="tocp"><a href="#khai-thác-lỗ-hổng">Khai thác lỗ hổng</a></li>
+    </ul>
+  </li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Hôm nay UCC sẽ đổi gió bằng một bài viết về chủ đề Security. Hãy cùng chúng mình tìm hiểu về một trong những lỗ hổng ứng dụng web cơ bản nhất - <strong>OS Command Injection</strong> - bằng cách phân tích một ví dụ thực tế từ một máy chủ đặt tại Nhật Bản. Các nhà nghiên cứu bảo mật đã tìm ra lỗ hổng OS Command Injection trong chức năng kiểm tra email của ứng dụng SolarView Compact phiên bản <strong>6.0</strong>. Lỗ hổng này đã được chương trình <a href="https://www.redhat.com/en/topics/security/what-is-cve">CVE</a> của tập đoàn MITRE công nhận và gán cho mã định danh <strong>CVE-2022-29303</strong> với điểm số mức độ nghiêm trọng là <strong>9.8 CRITICAL</strong>, cho phép kẻ tấn công có thể chiếm quyền hệ thống.</p>
+
+<h2 id="giới-thiệu-về-solarview">Giới thiệu về SolarView</h2>
+
+<p><strong>SolarView Compact</strong> là một ứng dụng web được viết bằng PHP, có nhiệm vụ theo dõi <a href="https://www.contec.com/solutions/energy/solutions/solar-battery/">hệ thống năng lượng mặt trời</a> dành cho doanh nghiệp và trường học do công ty Nhật Bản <strong>CONTEC</strong> cung cấp. Mô hình chung của hệ thống được biểu diễn như hình minh họa dưới đây:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled.png" alt="Untitled.png" /></p>
+
+<p>Toàn bộ dữ liệu từ các thiết bị như tấm pin năng lượng mặt trời, cảm biến, … sẽ được thu thập bởi thiết bị SolarView Compact (cụ thể là mã sản phẩm <a href="https://www.contec.com/products-services/environmental-monitoring/solarview/pv-package/sv-cpt-mc310/feature/#section">SV-CPT-MC310</a>) sau đó hiển thị qua một ứng dụng chạy trên web server giúp truy cập từ xa:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 1.png" alt="Untitled.png" /></p>
+
+<p>Sản phẩm SV-CPT-MC310 trên trang chủ CONTEC</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 2.png" alt="Untitled.png" /></p>
+
+<p>Giao diện của ứng dụng web SolarView Compact</p>
+
+<h2 id="phân-tích-lỗ-hổng-trong-mã-nguồn-solarview-compact-60">Phân tích lỗ hổng trong mã nguồn SolarView Compact 6.0</h2>
+
+<h3 id="code-logic">Code Logic</h3>
+
+<p>Bằng những “biện pháp nghiệp vụ”, UCC đã tìm ra địa chỉ IP của một máy chủ Nhật Bản đang chạy phiên bản dính lỗ hổng của ứng dụng SolarView Compact.</p>
+
+<p>Lỗ hổng OS Command Injection tồn tại trong chức năng kiểm tra email của ứng dụng web có tên là <strong>conf_mail.php</strong> (giao diện này đã được Google Translate tự động dịch sang Tiếng Anh, ở phiên bản gốc, toàn bộ chữ trên giao diện là Tiếng Nhật):</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 3.png" alt="Untitled.png" /></p>
+
+<p>Theo như giao diện, chúng ta có thể đoán được chức năng của conf_mail.php là gửi một email kiểm tra đến địa chỉ mail mà người dùng nhập vào:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 4.png" alt="Untitled.png" /></p>
+
+<p>Sử dụng phần mềm <strong>BurpSuite</strong>, chúng ta có thể quan sát được request được trình duyệt gửi đi sau khi bấm nút “send e-mail”:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 5.png" alt="Untitled.png" /></p>
+
+<p>Khi bấm nút “send e-mail”, trình duyệt sẽ gửi một <strong>POST</strong> request lên <strong>conf_mail.php</strong>, và địa chỉ email người dùng nhập vào sẽ được đặt bên trong parameter “<strong>mail_address</strong>”. Còn parameter <strong>button</strong> chỉ là tên của cái nút đó (”send e-mail” trong tiếng Nhật). Toàn bộ phần body đã được mã hóa URL encode.</p>
+
+<p>Tiếp theo chúng ta sẽ kiểm tra mã nguồn của file <strong>conf_mail.php</strong>:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 6.png" alt="Untitled.png" /></p>
+
+<p>Dòng 2, 3, 4, server đang khởi tạo giá trị của 2 biến <strong>$button</strong> và <strong>$mail_address</strong> dựa theo giá trị của 2 parameter tương ứng trong phần body của <strong>POST</strong> request mà chúng ta đã quan sát được ở phía trên:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 7.png" alt="Untitled.png" /></p>
+
+<p>Vậy là khi server nhận được <strong>POST</strong> request, biến <strong>$button</strong> sẽ nhận giá trị là chữ tiếng Nhật, dịch ra  “send e-mail”, còn biến <strong>$mail_address</strong> nhận giá trị là “admin@admin.com”. Dòng 6, 7, 8, 9 server đang import một số biến và hàm từ bên ngoài:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 8.png" alt="Untitled.png" /></p>
+
+<p>Dòng 12 server kiểm tra lại tên của biến $button xem có tương đương với nội dung biến <strong>$LABEL_SENDEXEC</strong> hay không (biến này có thể server đã import từ dòng 6, 7, 8, 9):</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 9.png" alt="Untitled.png" /></p>
+
+<p>Dòng 13, server cố gắng loại bỏ toàn bộ dấu cách trong biến <strong>$mail_address</strong>:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 10.png" alt="Untitled.png" /></p>
+
+<p>Tiếp theo là đoạn code thú vị nhất:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 11.png" alt="Untitled.png" /></p>
+
+<p>Dòng 14 kiểm tra biến $mail_address có đủ độ dài trên 3 hay không. Tiến vào đoạn code bên trong hàm if, chúng ta thấy server khởi tạo một biến mới tên là <strong>$sendmes</strong> có nội dung là một đoạn tiếng Nhật nào đó:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 12.png" alt="Untitled.png" /></p>
+
+<p><strong>Conf_mail.php</strong> tiếp tục khởi tạo biến <strong>$exec_cmd</strong> có nội dung là một câu lệnh Linux có chức năng thêm 1 dòng chữ vào file <strong>/dev/elogparam</strong> nằm trong server:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$exec_cmd</span> <span class="o">=</span> <span class="s2">"echo -1 "</span><span class="mf">.</span><span class="nv">$mail_address</span><span class="mf">.</span><span class="s2">" TEST-MAIL '</span><span class="nv">$sendmes</span><span class="s2">' &gt; /dev/elogparam"</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Nội dung biến <strong>$mail_address</strong> và <strong>$sendmes</strong> được ghép vào tạo thành một câu lệnh hoàn chỉnh lưu trong biến <strong>$exec_cmd</strong>. Vậy với <strong>mail_address</strong> chúng ta ban đầu nhập là admin@admin.com, biến <strong>$exec_cmd</strong> sẽ có nội dung như sau:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">echo</span> <span class="nt">-1</span> admin@admin.com TEST-MAIL 本メールはSolarViewが送信したテストメールです。&gt; /dev/elogparam
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó, <strong>conf_mail.php</strong> thực thi câu lệnh này bằng cách đưa nội dung biến <strong>$exec_cmd</strong> vào hàm <strong>system()</strong>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">system</span><span class="p">(</span> <span class="nv">$exec_cmd</span> <span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="khai-thác-lỗ-hổng">Khai thác lỗ hổng</h3>
+
+<p>Vậy chính xác lỗ hổng OS Command Injection nằm ở đâu? Câu trả lời chính là ở dòng 16, khi server ghép nội dung biến <strong>$mail_address</strong> vào câu lệnh <strong>$exec_cmd</strong>. Do mã nguồn không hề có bước thanh lọc user input, kẻ tấn công thay vì nhập một email hợp lệ như thông thường, họ sẽ chèn thêm câu lệnh Linux.</p>
+
+<p>Thay vì nhập:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">admin</span><span class="o">@</span><span class="n">admin</span><span class="mf">.</span><span class="n">com</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Hách cơ sẽ nhập:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="p">;</span><span class="nb">id</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>“id” trong Linux là một câu lệnh hiển thị thông tin user hiện tại. Khi nhập payload trên, tại dòng 16, biến <strong>$exec_cmd</strong> sẽ có giá trị như sau:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">echo</span> <span class="nt">-1</span> <span class="p">;</span><span class="nb">id</span><span class="p">;</span> TEST-MAIL <span class="s1">'$sendmes'</span> <span class="o">&gt;</span> /dev/elogparam
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Như vậy, khi biến này được đưa vào hàm system(), thực tế sẽ có 3 lệnh được thực thi:</p>
+
+<ul>
+  <li>echo -1: in ra “-1”</li>
+  <li><strong>id</strong>: hiển thị thông tin user</li>
+  <li>TEST-MAIL ‘$sendmes’ &gt; /dev/elogparam: chạy một binary có tên “TEST-MAIL” và đưa output vào file /dev/elogparam, nhưng vì binary này không tồn tại nên câu lệnh này sẽ bị lỗi</li>
+</ul>
+
+<p>Chúng ta có thể thấy, kẻ tấn công đã thành công trong việc thực thi lệnh bất kỳ trên hệ thống bằng cách sử dụng dấu ; để cô lập câu lệnh mới với 2 phần trước và sau biến $exec_cmd gốc. Thay vì “id”, kẻ tấn công có thể thực hiện bất kỳ câu lệnh nào họ muốn, đồng nghĩa họ đã kiểm soát được server.</p>
+
+<p>Hãy cùng kiểm chứng với mục tiêu UCC đã tìm thấy. Sử dụng phần mềm Burp Suite để thay đổi nội dung request đến server:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 13.png" alt="Untitled.png" /></p>
+
+<p>Tại parameter mail_address, chúng ta thay đổi email thông thường thành “<strong>;id</strong>;” (dấu ; khi được mã hóa url sẽ trở thành <strong>%3B</strong>). Gửi request này lên server và chúng ta nhận được response:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 14.png" alt="Untitled.png" /></p>
+
+<p>Output của câu lệnh đã được trả về thành công. Vậy còn những câu lệnh yêu cầu param thì sao? Server đã có một dòng code loại bỏ toàn bộ dấu cách. Làm như thế nào để chèn được câu lệnh hợp lệ chứa dấu cách?</p>
+
+<p>Để bypass dòng code này, chúng ta sẽ sử dụng biến môi trường có sẵn trên Linux đó là <strong>IFS</strong>, viết tắt của Internal Field Separator (nói trắng ra là dấu cách). Như vậy, để thực thi một câu lệnh như <code class="language-plaintext highlighter-rouge">cat /etc/passwd</code> trên server, chúng ta sẽ chèn <code class="language-plaintext highlighter-rouge">;cat${IFS}/etc/passwd;</code> dưới dạng mã hóa URL (tuân thủ header Content-Type: application/x-www-form-urlencoded)</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 15.png" alt="Untitled.png" /></p>
+
+<p>Và nhận được response:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-07-19-solar-view/Untitled 16.png" alt="Untitled.png" /></p>
+
+<p>Các bạn hãy theo dõi UCC để đón đọc những bài viết về chủ đề Security tiếp theo nhé!</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-07-19">19 Jul 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#security">security</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#code">#code</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#security">#security</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//giai-bai-tap/"> &laquo; Làm thế nào để giải quyết các bài toán gặp phải khi lập trình? 🤔</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//mot-so-concept-co-ban-react/">Một số concepts cơ bản của React &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

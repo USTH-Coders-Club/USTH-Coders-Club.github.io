@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!" />
+<meta property="og:description" content="Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!" />
+<link rel="canonical" href="https://usth-coders-club.github.io/discord-music-bot-3/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/discord-music-bot-3/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets/images/posts/2022-05-06-discord-music-bot-3/banner.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-06T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets/images/posts/2022-05-06-discord-music-bot-3/banner.jpg" />
+<meta property="twitter:title" content="[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-06T00:00:00+00:00","datePublished":"2022-05-06T00:00:00+00:00","description":"Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!","headline":"[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng","image":"https://usth-coders-club.github.io/assets/images/posts/2022-05-06-discord-music-bot-3/banner.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/discord-music-bot-3/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/discord-music-bot-3/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng&url=https://usth-coders-club.github.io/discord-music-bot-3/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/discord-music-bot-3/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/discord-music-bot-3/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="/assets/images/avatar/picklerick.jpg" alt="Đỗ Nhật Thành">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="https://thanlanslab.wordpress.com/">Đỗ Nhật Thành</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/posts/2022-05-06-discord-music-bot-3/banner.jpg" alt="[CODE MUSIC BOT FOR DISCORD] - Phần 3: Lập trình các tính năng">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#cấu-trúc-hoạt-động-của-bot">Cấu trúc hoạt động của Bot</a></li>
+  <li class="tocp"><a href="#handlersjs">handlers.js</a></li>
+  <li class="tocp"><a href="#playjs">play.js</a></li>
+  <li class="tocp"><a href="#pausejs">pause.js</a></li>
+  <li class="tocp"><a href="#resumejs">resume.js</a></li>
+  <li class="tocp"><a href="#skipjs">skip.js</a></li>
+  <li class="tocp"><a href="#backjs">back.js</a></li>
+  <li class="tocp"><a href="#stopjs">stop.js</a></li>
+  <li class="tocp"><a href="#nowplayingjs">nowplaying.js</a></li>
+  <li class="tocp"><a href="#queuejs">queue.js</a></li>
+  <li class="tocp"><a href="#tổng-kết">Tổng kết</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Ở Phần 2, UCC đã cùng các bạn đăng ký tài khoản Bot với Discord và đăng nhập vào nó bằng Javascript. Trong bài viết này, mình sẽ hướng dẫn các bạn lập trình đầy đủ các tính năng để con Bot của chúng ta chạy được nhạc nhé!</p>
+
+<h2 id="cấu-trúc-hoạt-động-của-bot">Cấu trúc hoạt động của Bot</h2>
+
+<p>Con Bot của chúng ta sẽ có những lệnh cơ bản của một Bot chơi nhạc:</p>
+
+<ul>
+  <li><strong>play</strong>: Chơi một bài nhạc</li>
+  <li><strong>pause</strong>: Tạm dừng nhạc</li>
+  <li><strong>resume</strong>: Tiếp tục chơi nhạc</li>
+  <li><strong>back</strong>: Quay về bài trước</li>
+  <li><strong>skip</strong>: Bỏ qua bài nhạc đang chơi</li>
+  <li><strong>nowplaying</strong>: Thông tin về bài nhạc đang được chơi</li>
+  <li><strong>queue</strong>: Danh sách các bài nhạc đã được đăng ký</li>
+  <li><strong>stop</strong>: Dừng chơi nhạc</li>
+</ul>
+
+<p>Với rất nhiều lệnh như vậy, chúng ta cần một “trung tâm điều khiển” để có thể xử lý. Mình sẽ gọi file này là <strong>handler.js</strong>. Nhiệm vụ của file này là phát hiện khi người dùng muốn ra lệnh nào đó cho Bot, sau đó xử lý tin nhắn họ gửi đến rồi chạy lệnh tương ứng. Con Bot của chúng ta sẽ hoạt động theo mô hình như sau:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled_Diagram.drawio.png" alt="Untitled_Diagram.drawio" /></p>
+
+<p>Object <strong>message</strong> được Discord trả về khi kích hoạt event “<strong>messageCreate</strong>” sẽ được truyền vào file <strong>handler.js</strong>. Tại đây, chúng ta sẽ phân biệt xem tin nhắn được gửi đến có phải một lệnh hợp lệ hay không, sau đó chuyển tách tên lệnh và argument rồi truyền xuống file tính năng tương ứng để xử lý. Ví dụ cho dễ hiểu, giả sử bạn gửi một tin nhắn có nội dung “<strong>!play Lâu đài tình ái</strong>”, handler.js sẽ nhận ra tin nhắn này bắt đầu bằng dấu “<strong>!</strong>” (<strong>PREFIX</strong>) báo hiệu cho bot chuẩn bị xử lý, sau đó file này sẽ tách tin nhắn ra làm hai phần: phần command là “<strong>play</strong>” và phần argument là “<strong>Lâu đài tình ái</strong>”, rồi nó sẽ truyền argument này vào file <strong>play.js.</strong></p>
+
+<p>Do vậy <strong>PREFIX</strong> khá quan trọng. Nó giúp con Bot của chúng ta phân biệt những tin nhắn cần xử lý và những tin nhắn nào không. Các bạn hãy thêm một dòng khai báo <strong>PREFIX</strong> vào file <strong>.env</strong> nhé. Ở đây mình dùng dấu chấm than <strong>!</strong>, các bạn có thể sử dụng dấu gì cũng được:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled.png" alt="Untitled.png" /></p>
+
+<h2 id="handlersjs">handlers.js</h2>
+
+<p>Như đã đề cập, file này sẽ xử lý tin nhắn đầu vào từ người dùng gửi đến server. Các bạn hãy tạo một folder là <strong>handler</strong> và cho vào đó một file <strong>handler.js</strong> nhé:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 1.png" alt="Untitled 1.png" /></p>
+
+<p>Ở đây chúng ta sẽ cần đến biến <strong>PREFIX</strong> ở file .env, nên các bạn hãy khai báo sử dụng module <strong>dotenv</strong> nhé:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dotenv</span><span class="dl">'</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Vì chúng ta sẽ cần sử dụng file <strong>handler.js</strong> này ở <strong>index.js</strong>, nên các bạn hãy sử dụng <strong>module.exports</strong> để xuất hàm xử lý ra ngoài:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta sẽ xuất ra ngoài hàm <strong>handle()</strong> chứa các tham số bao gồm object <strong>client</strong>, <strong>message</strong> và <strong>player</strong>.</p>
+
+<p>Okay. Việc đầu tiên chúng ta cần làm là kiểm tra xem tin nhắn của người gửi có bắt đầu bằng <strong>PREFIX</strong> hay không. Bên cạnh đó ta cũng không muốn xử lý những tin nhắn mà chính con Bot của mình gửi đến server:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">raw_message</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">content</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">raw_message</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PREFIX</span><span class="p">)</span> <span class="o">||</span> <span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">bot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Nếu tin nhắn được gửi đến vừa bắt đầu với PREFIX lại vừa không phải từ Bot, chúng ta sẽ xử lý tiếp. Bước tiếp theo ta sẽ tách tên <strong>command</strong> và <strong>argument</strong>.</p>
+
+<p>Vì phần <strong>command</strong> và <strong>argument</strong> được phân cách nhau bởi dấu cách, chúng ta có thể sử dụng hàm <code class="language-plaintext highlighter-rouge">split(” “)</code> , sau đó lược bỏ phần PREFIX đi:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">command</span> <span class="o">=</span> <span class="nx">raw_message</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">substring</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PREFIX</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Phần còn lại của tin nhắn sẽ là <strong>argument</strong>. Chúng ta sẽ muốn nó là một string duy nhất nên sẽ sử dụng hàm <strong>join()</strong>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">raw_message</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta thêm hai dòng để kiểm tra xem <strong>command</strong> và <strong>argument</strong> đã được tách thành công chưa nhé:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Command: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">command</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Argument: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">args</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">dotenv</span><span class="dl">'</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">handle</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">raw_message</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">content</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">raw_message</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PREFIX</span><span class="p">)</span> <span class="o">||</span> <span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">bot</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">command</span> <span class="o">=</span> <span class="nx">raw_message</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">substring</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PREFIX</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">raw_message</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">);</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Command: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">command</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Argument: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">args</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Trước tiên chúng ta cần kết nối file <strong>handler.js</strong> này với <strong>index.js</strong> đã. Ở <strong>index.js</strong>, chúng ta cần nạp file <strong>handler.js</strong> vào một biến:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">Handler</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./handler/handler.js</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ở hàm xử lý event “<strong>messageCreate</strong>”, chúng ta sẽ truyền object <strong>message</strong> vào <strong>Handler</strong>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">messageCreate</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">Handler</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 2.png" alt="Untitled 2.png" /></p>
+
+<p>Sau đó chúng ta bấm chạy <strong>index.js</strong> thôi:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 3.png" alt="Untitled 3.png" /></p>
+
+<p>Bây giờ hãy gửi thử tin nhắn “<strong>!play Lâu đài tình ái</strong>” lên server:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 4.png" alt="Untitled 4.png" /></p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 5.png" alt="Untitled 5.png" /></p>
+
+<p>Tuỵt! Vậy là <strong>command</strong> và <strong>argument</strong> đã đươc tách thành công.</p>
+
+<h2 id="playjs">play.js</h2>
+
+<p>Chúng ta đã hoàn thành chức năng đầu tiên của file <strong>handler.js</strong>. Việc tiếp theo là truyền <strong>argument</strong> vào các file chức năng tương ứng. Đầu tiên chúng ta sẽ lập trình file <strong>play.js</strong> có chức năng nhảy vào kênh voice của người dùng và chơi bài nhạc được yêu cầu, nếu Bot đang chơi một bài rồi, nó sẽ cho bài mới yêu cầu vào <strong>queue</strong>.</p>
+
+<p>Đầu tiên bạn hãy tạo một folder <strong>commands</strong> để lưu các file lệnh, sau đó tạo file <strong>play.js</strong> ở trong đó nhé:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 6.png" alt="Untitled 6.png" /></p>
+
+<p>Đầu tiên khai báo một số <strong>module</strong> sẽ sử dụng:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">QueryType</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord-player</span><span class="dl">'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta sẽ lại sử dụng <strong>module.exports</strong> để xuất hàm xử lý ra ngoài:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">play</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">play a song</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">args</span><span class="p">){</span>
+        
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta sẽ lấy thông tin về server và tác giả tin nhắn:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">guild</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">guilds</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">guild</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ta kiểm tra xem tác giả có ở trong kênh voice nào không:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">you are not in a voice channel.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Tạo một queue mới:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">createQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">channel</span><span class="p">:</span> <span class="nx">message</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó ta cho bot kết nối vào kênh voice, nếu có vấn đề gì sẽ báo lỗi:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">try</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">connection</span><span class="p">)</span> <span class="k">await</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="nx">queue</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">could not join your voice channel!</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Nếu kết nối thành công, chúng ta sẽ tạo một track mới:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">track</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">player</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">requestedBy</span><span class="p">:</span> <span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+    <span class="na">searchEngine</span><span class="p">:</span> <span class="nx">QueryType</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">track</span> <span class="o">||</span> <span class="o">!</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">`no video/song/playlist was found while searching for: </span><span class="p">${</span><span class="nx">track</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Đoạn code trên sẽ tìm kiếm bài nhạc theo tên đã nhập. Ta khởi tạo một tin nhắn Discord Embed để thông tin về bài nhạc vừa tìm được:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">playEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span>
+        <span class="s2">`🎶 | new </span><span class="p">${</span><span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">playlist</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">song</span><span class="dl">'</span><span class="p">}</span><span class="s2"> added to queue`</span>
+    <span class="p">);</span>
+
+<span class="c1">// create embed with thumbnail and description for single tracks</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nx">playEmbed</span><span class="p">.</span><span class="nx">setThumbnail</span><span class="p">(</span><span class="nx">tr</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">);</span>
+    <span class="nx">playEmbed</span><span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">tr</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Xong xuôi rồi chúng ta sẽ cho con Bot bật bài nhạc này lên, nếu có một bài nào đó đang được bật thì bot sẽ cho bài mới vào queue:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span>
+        <span class="p">?</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTracks</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">)</span>
+        <span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">playEmbed</span><span class="p">]</span> <span class="p">});</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span>
+        <span class="p">?</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTracks</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">)</span>
+        <span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTrack</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">playEmbed</span><span class="p">]</span> <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Oke, vậy là chúng ta đã lập trình xong file <strong>play.js</strong> rồi đấy:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+</pre></td><td class="rouge-code"><pre><span class="c1">// necessary classes</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">QueryType</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord-player</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">play</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">play a song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// get ids of server and person the message was sent from</span>
+        <span class="kd">const</span> <span class="nx">guild</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">guilds</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">guild</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">you are not in a voice channel.</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// create a queue for given server</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">createQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">metadata</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">channel</span><span class="p">:</span> <span class="nx">message</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="c1">// check for voice channel connection</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">connection</span><span class="p">)</span> <span class="k">await</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+            <span class="nx">queue</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">could not join your voice channel!</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="c1">// search for track with given query</span>
+        <span class="kd">const</span> <span class="nx">track</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">player</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">requestedBy</span><span class="p">:</span> <span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+            <span class="na">searchEngine</span><span class="p">:</span> <span class="nx">QueryType</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
+        <span class="p">});</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">track</span> <span class="o">||</span> <span class="o">!</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="s2">`no video/song/playlist was found while searching for: </span><span class="p">${</span><span class="nx">track</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+
+        <span class="c1">// create embed message</span>
+        <span class="kd">const</span> <span class="nx">playEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+            <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span>
+                <span class="s2">`🎶 | new </span><span class="p">${</span><span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">playlist</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">song</span><span class="dl">'</span><span class="p">}</span><span class="s2"> added to queue`</span>
+            <span class="p">);</span>
+
+        <span class="c1">// create embed with thumbnail and description for single tracks</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="nx">playEmbed</span><span class="p">.</span><span class="nx">setThumbnail</span><span class="p">(</span><span class="nx">tr</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">);</span>
+            <span class="nx">playEmbed</span><span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">tr</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// if queue isn't playing, add tracks to queue and play them</span>
+        <span class="c1">// if queue is playing, add tracks to queue</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span>
+                <span class="p">?</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTracks</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">)</span>
+                <span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">playEmbed</span><span class="p">]</span> <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">track</span><span class="p">.</span><span class="nx">playlist</span>
+                <span class="p">?</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTracks</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">)</span>
+                <span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">addTrack</span><span class="p">(</span><span class="nx">track</span><span class="p">.</span><span class="nx">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">playEmbed</span><span class="p">]</span> <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">tracks</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta quay lại file <strong>handler.js</strong> để kết nối <strong>play.js</strong>. Các bạn thêm một hàm xử lý nếu tên command người dùng nhập là “<strong>play</strong>”:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">play</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Play</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/play</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Play</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 7.png" alt="Untitled 7.png" /></p>
+
+<p>Có vẻ ổn rồi đó. Các bạn hãy chạy file <strong>index.js</strong> và vào server test thử nhé:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 8.png" alt="Untitled 8.png" /></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Rất rõ và mượt ヽ</td>
+      <td>･ω･</td>
+      <td>ゞ</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pausejs">pause.js</h2>
+
+<p>Sau khi đã lập trình tính năng chơi nhạc, chúng ta cần chức năng tạm dừng. Các bạn hãy tạo một file có tên <strong>pause.js</strong> trong thư mục <strong>commands</strong> nha:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 9.png" alt="Untitled 9.png" /></p>
+
+<p>Chúng ta cũng sẽ cần thông tin về server và tác giả tin nhắn, và kiểm tra xem người đó có ở trong kênh voice không:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pause</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pauses the currently playing song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">guild</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">guilds</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">guild</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">you are not in a voice channel.</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Tiếp đó chúng ta lấy thông tin về queue nhạc hiện tại:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Nếu không có bài nào đang được chơi, chúng ta cho Bot thông báo:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span> <span class="o">||</span> <span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | there is no music playing in this server.</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Còn nếu có, chúng ta sử dụng hàm <strong>setPaused()</strong> để dừng:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">({</span> <span class="na">paused</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">content</span><span class="p">:</span> <span class="nx">y</span> <span class="p">?</span> <span class="s2">`⏸ | paused.`</span> <span class="p">:</span> <span class="s2">`:x: | failed to pause`</span><span class="p">,</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Đơn giản vậy thôi!</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pause</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pauses the currently playing song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">guild</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">guilds</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">guild</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">you are not in a voice channel.</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span> <span class="o">||</span> <span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | there is no music playing in this server.</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">({</span> <span class="na">paused</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="nx">y</span> <span class="p">?</span> <span class="s2">`⏸ | paused.`</span> <span class="p">:</span> <span class="s2">`:x: | failed to pause`</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta quay lại file <strong>handler.js</strong> và kết nối file này nhé:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">pause</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Pause</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/pause</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Pause</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="resumejs">resume.js</h2>
+
+<p>Đi kèm với chức năng tạm dừng nhạc, chúng ta cũng cần có chức năng tiếp tục phải không? Các bạn hãy tạo thêm file resume.js vào thư mục commands nha. Code của file này sẽ giống hệt với file pause.js, chỉ khác hàm <strong>setPaused()</strong> chúng ta truyền vào giá trị false:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">resume</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">resumes the currently paused song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">guild</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">guilds</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">guild</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">voice</span><span class="p">.</span><span class="nx">channelId</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">you are not in a voice channel.</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span> <span class="o">||</span> <span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | there is no music playing in this server.</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span>
+                <span class="nx">y</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">▶ | resumed.</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | failed to resume.</span><span class="dl">'</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Các bạn nhớ kết nối file này vào <strong>handler.js</strong> nha:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">resume</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Resume</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/resume</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Resume</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="skipjs">skip.js</h2>
+
+<p>Chức năng bỏ qua bài nhạc hiện tại là không thể thiếu với một ứng dụng chơi nhạc. Các bạn hãy tạo file với tên <strong>skip.js</strong> trong folder commands:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 10.png" alt="Untitled 10.png" /></p>
+
+<p>Tiếp theo chúng ta sẽ lấy thông tin về queue hiện tại:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta sử dụng hàm <strong>skip()</strong> để bỏ qua bài nhạc, sau đó thông báo vào server:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">nowPlaying</span><span class="p">().</span><span class="nx">title</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">skip</span><span class="p">();</span>
+<span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+    <span class="na">content</span><span class="p">:</span> <span class="nx">success</span>
+        <span class="p">?</span> <span class="s2">`⏭ | skipped **</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">}</span><span class="s2">**`</span>
+        <span class="p">:</span> <span class="s2">`:x: | failed to skip track`</span>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">skip</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">skip a song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">nowPlaying</span><span class="p">().</span><span class="nx">title</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">skip</span><span class="p">();</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+            <span class="na">content</span><span class="p">:</span> <span class="nx">success</span>
+                <span class="p">?</span> <span class="s2">`⏭ | skipped **</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">}</span><span class="s2">**`</span>
+                <span class="p">:</span> <span class="s2">`:x: | failed to skip track`</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Cuối cùng thì kết nối file này vào <strong>handler.js</strong>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">skip</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Skip</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/skip</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Skip</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="backjs">back.js</h2>
+
+<p>Chúng ta sẽ lập trình chức năng quay lại về bài nhạc trước đó. Các bạn hãy tạo file <strong>back.js</strong> trong folder <strong>commands</strong>, sau đó lấy thông tin về queue đang chạy:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">back</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">plays the previous track.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó chúng ta đơn giản chỉ cần sử dụng hàm <strong>back()</strong> để quay lại bài trước, sau đó thông báo lên vào kênh chat:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">queue</span><span class="p">.</span><span class="nx">back</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">nowPlaying</span><span class="p">();</span>
+
+    <span class="kd">const</span> <span class="nx">playEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="s2">`🎶 | now playing`</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span><span class="s2">`[</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">](</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2">)`</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">setThumbnail</span><span class="p">(</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="nx">playEmbed</span> <span class="p">});</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">back</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">plays the previous track.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="c1">// fuk</span>
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">queue</span><span class="p">.</span><span class="nx">back</span><span class="p">();</span>
+            <span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">nowPlaying</span><span class="p">();</span>
+
+            <span class="kd">const</span> <span class="nx">playEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="s2">`🎶 | now playing`</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span><span class="s2">`[</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">](</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2">)`</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">setThumbnail</span><span class="p">(</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="nx">playEmbed</span> <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó quay lại file <strong>handler.js</strong> và kết nối file này:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">back</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Back</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/back</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Back</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="stopjs">stop.js</h2>
+
+<p>Lệnh này có chức năng dừng hẳn chơi nhạc và xóa danh sách các bài nhạc đã đăng ký. Nhờ sự tiện lợi của module <strong>discord-player</strong>, chúng ta có thể đơn giản làm việc này với hàm <strong>destroy()</strong>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stop</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stop your music and destroy your queue.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span> <span class="o">||</span> <span class="o">!</span><span class="nx">queue</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is being played.</span><span class="dl">'</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="nx">queue</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+            <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">🛑 | successfully stopped music.</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Hãy nhớ kết nối với file <strong>handler.js</strong> nha:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">stop</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Stop</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/stop</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">Stop</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="nowplayingjs">nowplaying.js</h2>
+
+<p>Tính năng lấy thông tin của bài nhạc hiện tại đang chơi cũng rất hữu ích. Để lập trình được tính năng này, các bạn hãy tạo file <strong>nowplaying.js</strong> trong thư mục <strong>commands</strong> và lấy thông tin về queue hiện tại:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nowplaying</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">displays currently playing song.</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó chúng ta lấy thông tin về bài nhạc đang được chạy bằng hàm <strong>nowPlaying()</strong>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">nowPlaying</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó chúng ta cho Bot thông báo lên server bằng một <a href="https://discordjs.guide/popular-topics/embeds.html#embed-preview">Embed Message</a> thật đẹp:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">npEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="s2">`🎶 | now playing`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span><span class="s2">`[</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">](</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2">)`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setThumbnail</span><span class="p">(</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">addFields</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">uploader</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="nx">currentTrack</span><span class="p">.</span><span class="nx">author</span><span class="p">,</span>
+            <span class="na">inline</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">duration</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="nx">currentTrack</span><span class="p">.</span><span class="nx">duration</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">inline</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="cm">/*{
+            name: 'requested by',
+            value: currentTrack.requestedBy.username,
+            inline: true,
+        },*/</span>
+        <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">views</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="nx">currentTrack</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+            <span class="na">inline</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">progress bar</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">createProgressBar</span><span class="p">({</span> <span class="na">timecodes</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}),</span>
+        <span class="p">},</span>
+    <span class="p">);</span>
+
+<span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">npEmbed</span><span class="p">]</span> <span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Hãy nhớ kết nối file này với <strong>handler.js</strong> nha:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">command</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">nowplaying</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">NowPlaying</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../commands/nowplaying</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">NowPlaying</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 11.png" alt="Untitled 11.png" /></p>
+
+<h2 id="queuejs">queue.js</h2>
+
+<p>Chức năng cuối cùng và cũng rất hữu dụng, đó là thông báo về những bài nhạc đang chờ trong queue. Đầu tiên, chúng ta tạo file <strong>queue.js</strong> trong thư mục <strong>commands</strong>, sau đó lấy thông tin về queue hiện tại:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span> <span class="nx">MessageEmbed</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">discord.js</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">queue</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">displays current queue</span><span class="dl">'</span><span class="p">,</span>
+
+    <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">client</span><span class="p">,</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">getQueue</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">guildId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">queue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+                <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1">:x: | no music is playing in this server</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">ephemeral</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+		<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sau đó chúng ta lấy danh sách các bài trong queue này:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">currentTrack</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">current</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta lấy 10 bài đầu tiên trong queue để hiển thị, sau đó thông báo lên server bằng Embed Message:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">tracks</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">m</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span><span class="s2">. **</span><span class="p">${</span><span class="nx">m</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">** ([link](</span><span class="p">${</span><span class="nx">m</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2">))`</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">progressBar</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">createProgressBar</span><span class="p">({</span> <span class="na">timecodes</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">queueEmbed</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageEmbed</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="s2">`RANDOM`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="dl">'</span><span class="s1">🎶 | current queue</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">setDescription</span><span class="p">(</span>
+        <span class="s2">`**__now playing__ - [</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">](</span><span class="p">${</span><span class="nx">currentTrack</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2">)**\n
+        </span><span class="p">${</span><span class="nx">progressBar</span><span class="p">}</span><span class="s2">\n
+        </span><span class="p">${</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="se">\n</span><span class="dl">'</span><span class="p">)}${</span>
+            <span class="nx">queue</span><span class="p">.</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span>
+                <span class="p">?</span> <span class="s2">`\n...</span><span class="p">${</span>
+                    <span class="nx">queue</span><span class="p">.</span><span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">tracks</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span>
+                        <span class="p">?</span> <span class="s2">`{queue.tracks.length - tracks.length} more track`</span>
+                        <span class="p">:</span> <span class="s2">`{queue.tracks.length - tracks.length} more tracks`</span>
+                    <span class="p">}</span><span class="s2">`</span>
+                <span class="p">:</span> <span class="dl">""</span>
+        <span class="p">}</span><span class="s2">`</span>
+    <span class="p">);</span>
+
+<span class="k">return</span> <span class="k">await</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="na">embeds</span><span class="p">:</span> <span class="p">[</span><span class="nx">queueEmbed</span><span class="p">]</span> <span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-05-06-discord-music-bot-3/Untitled 12.png" alt="Untitled 12.png" /></p>
+
+<h2 id="tổng-kết">Tổng kết</h2>
+
+<p>Nếu các bạn theo mình đến đây, chúc mừng bạn đã tự tay lập trình ra một con bot siêu vjp. Trên đây, UCC đã hướng dẫn 8 chức năng cơ bản nhất của một con Bot Discord chơi nhạc. Các bạn hoàn toàn có thể thỏa thích sáng tạo thêm những tính năng khác cho Bot, thậm chí có thể làm game với nó. Nếu có bất kỳ thắc mắc nào, hãy đừng ngần ngại mà nhắn tin cho chúng tớ tại <a href="https://www.facebook.com/USTH.Coders.Club/">fanpage</a> nhé!</p>
+
+<p>Cuối cùng, chúng mình gửi lại các bạn toàn bộ mã nguồn của con bot tại <a href="https://github.com/j1nxie/minccino">đây</a>.</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-05-06">06 May 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#javascript">javascript</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#coding">#coding</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//discord-music-bot-2/"> &laquo; [CODE MUSIC BOT FOR DISCORD] - Phần 2: Một số lệnh cơ bản</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="//GUI-vs-CLI/">So sánh GUI và CLI &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>

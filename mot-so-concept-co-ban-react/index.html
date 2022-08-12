@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="icon" href="/assets/images/icon_round_32.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter|Roboto">
+
+        <title>Một số concepts cơ bản của React | UCC Blog</title>
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Một số concepts cơ bản của React | UCC Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Một số concepts cơ bản của React" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Trước đây các trang web chỉ được làm bằng HTML, CSS, JS. Nhưng một nhược điểm khi chỉ dùng đơn thuần HTML, CSS, JS là khó có thể tạo ra những trang web với độ tương tác cao. Để giải quyết vấn đề đó đã có nhiều JS frontend library đã ra đời giúp nâng cao tính tương tác và biến các trang web giống các native app hơn. Một trong số chúng là: React, Vue, Svelte,… Trong số những thư viện đó, React là thư viện được sử dụng nhiều nhất. Đối với các bạn đang bắt đầu học React, sẽ có nhiều thay đổi so với sử dụng HTML, CSS, JS bình thường, cùng với đó là nhiều concepts mới. Vì vậy bài viết này sẽ giải thích về một số concepts cơ bản khi sử dụng thư viện này. Bài viết này không phải là hướng dẫn cụ thể cách sử dụng React; mà là một tài liệu tham khảo cho các bạn đang học React, muốn tránh cảm thấy ngợp cũng như muốn có một cái nhìn tổng quát hơn về thư viện này." />
+<meta property="og:description" content="Trước đây các trang web chỉ được làm bằng HTML, CSS, JS. Nhưng một nhược điểm khi chỉ dùng đơn thuần HTML, CSS, JS là khó có thể tạo ra những trang web với độ tương tác cao. Để giải quyết vấn đề đó đã có nhiều JS frontend library đã ra đời giúp nâng cao tính tương tác và biến các trang web giống các native app hơn. Một trong số chúng là: React, Vue, Svelte,… Trong số những thư viện đó, React là thư viện được sử dụng nhiều nhất. Đối với các bạn đang bắt đầu học React, sẽ có nhiều thay đổi so với sử dụng HTML, CSS, JS bình thường, cùng với đó là nhiều concepts mới. Vì vậy bài viết này sẽ giải thích về một số concepts cơ bản khi sử dụng thư viện này. Bài viết này không phải là hướng dẫn cụ thể cách sử dụng React; mà là một tài liệu tham khảo cho các bạn đang học React, muốn tránh cảm thấy ngợp cũng như muốn có một cái nhìn tổng quát hơn về thư viện này." />
+<link rel="canonical" href="https://usth-coders-club.github.io/mot-so-concept-co-ban-react/" />
+<meta property="og:url" content="https://usth-coders-club.github.io/mot-so-concept-co-ban-react/" />
+<meta property="og:site_name" content="UCC Blog" />
+<meta property="og:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-08-12-concept-co-ban-react%5Cbanner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-08-12-concept-co-ban-react%5Cbanner.png" />
+<meta property="twitter:title" content="Một số concepts cơ bản của React" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-12T00:00:00+00:00","datePublished":"2022-08-12T00:00:00+00:00","description":"Trước đây các trang web chỉ được làm bằng HTML, CSS, JS. Nhưng một nhược điểm khi chỉ dùng đơn thuần HTML, CSS, JS là khó có thể tạo ra những trang web với độ tương tác cao. Để giải quyết vấn đề đó đã có nhiều JS frontend library đã ra đời giúp nâng cao tính tương tác và biến các trang web giống các native app hơn. Một trong số chúng là: React, Vue, Svelte,… Trong số những thư viện đó, React là thư viện được sử dụng nhiều nhất. Đối với các bạn đang bắt đầu học React, sẽ có nhiều thay đổi so với sử dụng HTML, CSS, JS bình thường, cùng với đó là nhiều concepts mới. Vì vậy bài viết này sẽ giải thích về một số concepts cơ bản khi sử dụng thư viện này. Bài viết này không phải là hướng dẫn cụ thể cách sử dụng React; mà là một tài liệu tham khảo cho các bạn đang học React, muốn tránh cảm thấy ngợp cũng như muốn có một cái nhìn tổng quát hơn về thư viện này.","headline":"Một số concepts cơ bản của React","image":"https://usth-coders-club.github.io/assets%5Cimages%5Cposts%5C2022-08-12-concept-co-ban-react%5Cbanner.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://usth-coders-club.github.io/mot-so-concept-co-ban-react/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://usth-coders-club.github.io/assets/images/logo_fixed.png"}},"url":"https://usth-coders-club.github.io/mot-so-concept-co-ban-react/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+
+        <link href="/assets/css/screen.css" rel="stylesheet" />
+
+        <link href="/assets/css/main.css" rel="stylesheet" />
+    
+        <script src="/assets/js/jquery.min.js"></script>
+   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36DEMQV4QJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36DEMQV4QJ');
+</script>
+   
+<!--     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+        ga("create", "G-36DEMQV4QJ", "auto");
+        ga("send", "pageview");
+    </script> -->
+         </head>
+     
+    <body class="layout-post">
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+            <link
+                href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+                rel="stylesheet"
+            />
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                crossorigin="anonymous"
+            />
+        </noscript>
+
+        <!-- Begin Menu Navigation
+================================================== -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+            <div class="container pr-0">
+                <!-- Begin Logo -->
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/logo_fixed.png" height="50" alt="USTH Coders Club Blog"/>
+                </a>
+                <!-- End Logo -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarMediumish"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMediumish">
+                    <!-- Begin Menu -->
+
+                    <ul class="navbar-nav ml-auto">
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="/index.html">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+
+                        <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+                    </ul>
+
+                    <!-- End Menu -->
+                </div>
+            </div>
+        </nav>
+        <!-- End Navigation
+================================================== -->
+
+        <div class="site-content">
+            <div class="container">
+                <!-- Site Title
+================================================== -->
+                <div class="mainheading">
+                    <h1 class="sitetitle">USTH Coders Club Blog</h1>
+                    <p class="lead">Chia sẻ về lập trình</p>
+                </div>
+
+                <!-- Content
+================================================== -->
+                <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Một số concepts cơ bản của React&url=https://usth-coders-club.github.io/mot-so-concept-co-ban-react/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=435');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://usth-coders-club.github.io/mot-so-concept-co-ban-react/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://usth-coders-club.github.io/mot-so-concept-co-ban-react/" onclick="window.open(this.href, 'linkedin-share','width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                    
+                        
+                        <div class="row post-top-meta">
+                            <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                                
+                                <img class="author-thumb" src="https://www.gravatar.com/avatar/?s=250&d=mm&r=x" alt="Nguyễn Thanh Tùng">
+                                
+                            </div>
+                            <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                                <a target="_blank" class="link-dark" href="">Nguyễn Thanh Tùng</a><a target="_blank" href="" class="btn follow">Follow</a>
+                                <div class="author-description text-secondary">UCC Gen 2 RnD member.</div>
+                            </div>
+                        </div>
+                    
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Một số concepts cơ bản của React</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets\images\posts\2022-08-12-concept-co-ban-react\banner.png" alt="Một số concepts cơ bản của React">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <div class="divinline">
+                        <h3 class="font-weight-bold">Summary </h3>
+                        <a id='btntoc' onclick="tocbtn()">Hide</a>
+                        </div>
+                        <ul id="my_toc" class="inline_toc">
+  <li class="tocp"><a href="#react-là-gì">React là gì?</a></li>
+  <li class="tocp"><a href="#jsx">JSX</a></li>
+  <li class="tocp"><a href="#component">Component.</a>
+    <ul>
+      <li class="tocp"><a href="#props">Props</a></li>
+    </ul>
+  </li>
+  <li class="tocp"><a href="#xử-lý-các-events">Xử lý các Events</a></li>
+  <li class="tocp"><a href="#state-trạng-thái">State (trạng thái)</a></li>
+  <li class="tocp"><a href="#controlled-component">Controlled Component</a></li>
+  <li class="tocp"><a href="#tham-khảo-thêm">Tham khảo thêm</a></li>
+  <li class="tocp"><a href="#tổng-kết">Tổng kết</a></li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <p>Trước đây các trang web chỉ được làm bằng HTML, CSS, JS. Nhưng một nhược điểm khi chỉ dùng đơn thuần HTML, CSS, JS là khó có thể tạo ra những trang web với độ tương tác cao. Để giải quyết vấn đề đó đã có nhiều JS frontend library đã ra đời giúp nâng cao tính tương tác và biến các trang web giống các native app hơn. Một trong số chúng là: React, Vue, Svelte,… Trong số những thư viện đó, React là thư viện được sử dụng nhiều nhất.</p>
+
+<p>Đối với các bạn đang bắt đầu học React, sẽ có nhiều thay đổi so với sử dụng HTML, CSS, JS bình thường, cùng với đó là nhiều concepts mới. Vì vậy bài viết này sẽ giải thích về một số concepts cơ bản khi sử dụng thư viện này. Bài viết này không phải là hướng dẫn cụ thể cách sử dụng React; mà là một tài liệu tham khảo cho các bạn đang học React, muốn tránh cảm thấy ngợp cũng như muốn có một cái nhìn tổng quát hơn về thư viện này.</p>
+
+<h2 id="react-là-gì">React là gì?</h2>
+
+<ul>
+  <li>React là một một thư viện JavaScript open-source được phát triển bởi Facebook.</li>
+  <li>React được dùng để xây dựng UI (user interfaces) cho các trang web.</li>
+  <li>React đơn giản hóa việc xây dựng UI bằng cách chia nó thành những Component nhỏ, có thể tái sử dụng.</li>
+</ul>
+
+<h2 id="jsx">JSX</h2>
+
+<p>Thường một trang web sẽ được viết trong các file HTML và JS riêng biệt. Một nhược điểm khi viết HTML và JS riêng biệt đó là bạn phải viết trực tiếp (hard code) những thông tin bạn muốn hiển thị trong file HTML. Khi muốn sử dụng các chức năng của JS, và truy cập HTML bạn phải sử dụng query:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.container</span><span class="dl">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Hay khi muốn thêm các element mới phải viết:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">container</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">paragraph</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Viết code như vậy rất tốn thời gian.</p>
+
+<p>Trong React, JSX giúp kết hợp JS và HTML ngay trong một file JS. Ví dụ bạn có thế tạo một tag &lt;h1&gt; ngay trong file JS:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, World!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ở đây <code class="language-plaintext highlighter-rouge">&lt;h1&gt;Hello, World!&lt;/h1&gt;</code> được gọi là một đoạn JSX.</p>
+
+<p>!!!LƯU Ý: các đoạn JSX phải có một parent tag và khi viết xuống dòng phải bọc trong “()”</p>
+
+<p>đúng:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="c1">// sai</span>
+<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="c1">// đúng </span>
+<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+
+// sai  
+const element = 
+	<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+// đúng 
+const element = (
+	<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+);
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ngoài ra để tránh sử dụng nhiều tag &lt;div&gt; thừa, ta có thể dùng React Fragment: &lt;&gt;&lt;/&gt; để bọc các thông tin</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">&lt;&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>paragraph 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+	<span class="p">&lt;/&gt;</span>
+<span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Nhìn qua, JSX trông khá giống với các đoạn HTML bình thường. Nhưng JSX có một tính đặc biệt đó là cho phép ta embed các đoạn JavaScript vào trong bằng cách bọc chúng trong ngoặc nhọn “{}”. Trong ví dụ dưới, chúng ta khai báo biến name và dùng nó trong đoạn JSX:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">React</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, <span class="si">{</span> <span class="nx">name</span> <span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+
+<span class="c1">// element bằng &lt;h1&gt;Hello, React&lt;/h1&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Chúng ta cũng có thể gọi các hàm:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>1 + 2 = <span class="si">{</span> <span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+
+<span class="c1">// element bằng &lt;p&gt;1 + 2 = 3&lt;/p&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>JSX cũng có thể được lưu trong một Array:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">React</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Mike</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Amy</span><span class="dl">"</span><span class="p">]</span>
+<span class="kd">const</span> <span class="nx">helloList</span> <span class="o">=</span> <span class="nx">names</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">name</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span><span class="p">&gt;</span>Hello <span class="si">{</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;)</span>
+<span class="kd">const</span> <span class="nx">hello</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">helloList</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>!!!LƯU Ý: các element JSX trong một Array phải có attribute key khác nhau.</p>
+
+<h2 id="component">Component.</h2>
+
+<p>Một trong những tính năng nổi tiếng của React đó là có thể sử dụng Component. Đây là là một tính năng rất hữu ích và quan trọng mà bạn cần nắm chắc khi sử dụng React. Component đơn giản là những phần nhỏ của một trang web hay một UI. Component cho phép bạn chia UI thành các thành phần nhỏ hơn, độc lập và có thể tái sử dụng như những miếng Lego vậy.</p>
+
+<p>Lấy ví dụ như như trang web UCC Blog:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-08-12-concept-co-ban-react/khung_unedited.jpg" alt="khung_unedited.jpg" /></p>
+
+<p>Với HTML bình thường, chúng ta có thể biểu diễn nó như sau:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image1.jpg"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;h3&gt;</span>Phân tích lỗ hổng<span class="nt">&lt;/h3&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Hôm nay UCC sẽ đổi gió…<span class="nt">&lt;/p&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Đỗ Nhật Thành<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image2.jpg"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;h3&gt;</span>Làm thế nào để giải quyết…<span class="nt">&lt;/h3&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Giải quyết các bài toán…<span class="nt">&lt;/p&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Nguyễn Thanh Tùng<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image3.jpg"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;h3&gt;</span>So sánh GUI và CLI…<span class="nt">&lt;/h3&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Hệ điều hành là…<span class="nt">&lt;/p&gt;</span>
+		<span class="nt">&lt;p&gt;</span>Phạm Minh Hiếu, Văn Quốc An<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Quan sát kỹ hơn, ta có thể thấy cấu trúc của các bài Post khá tương tự nhau. Các bài Posts (như ô bôi đỏ trong hình dưới) đều có cách sắp xếp thông tin giống nhau:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-08-12-concept-co-ban-react/khung.jpg" alt="khung.jpg" /></p>
+
+<p>Hay trong file HTML chúng có dạng:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image.jpg"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;h3&gt;</span>Tiêu đề<span class="nt">&lt;/h3&gt;</span>
+	<span class="nt">&lt;p&gt;</span>Nội dung<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;p&gt;</span>Tác giả<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Thay vì phải viết lặp đi lặp lại đoạn HTML trên; chúng ta có thể tách bài Post thành một Component và sử dụng chúng nhiều lần:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">Post</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="s">"image.jpg"</span> <span class="p">/&gt;</span>
+			<span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Tiêu đề<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Nội dung<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tác giả<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+		<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+	<span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Component trong React đơn giản là một function có tên ở dạng <a href="https://techterms.com/definition/pascalcase">PascalCase</a> (viết hoa các chữ cái đầu của từ). Function này sẽ trả về một đoạn JSX mà nó muốn hiển thị. Như ví dụ ở trên, để tách bài Post thành một Component, chúng ta tạo một function với tên Post và trả lại đoạn JSX với cấu trúc của bài Post.</p>
+
+<p>Sau khi đã tạo xong Component, ta có thể sử dụng chúng như những tag HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>const postsList= (
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;Post/&gt;</span>
+		<span class="nt">&lt;Post/&gt;</span>
+		<span class="nt">&lt;Post/&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Với cách viết trên, bạn có thể đã nhận ra các Component Post đều sẽ hiển thị ra màn hình thông tin giống nhau. Vậy làm thể nào để một Component hiển thị những thông tin khác nhau?</p>
+
+<h3 id="props">Props</h3>
+
+<p>Props sẽ giúp ta đạt được điều này. Các Component có thể nhận thêm parameter props:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">Hello</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Props là những thông tin cần thiết để một Component có thể hiển thị đúng. Khi thông tin trong props thay đổi, Component sẽ thay đổi để hiển thị chính xác. Props có thể được truyền cho Component bằng cách khai báo thêm các attributes khi sử dụng Component đó:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">helloUCC</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nc">Hello</span> <span class="na">name</span><span class="p">=</span><span class="s">"UCC"</span> <span class="p">/&gt;</span>
+<span class="c1">// helloUCC bằng &lt;h1&gt;Hello UCC&lt;/h1&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Quay lại với Component Post ta có thể thay những dữ liệu cố định (hard-coded value) thành những dữ liệu được lấy từ props:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">Post</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">thumbnail</span><span class="si">}</span> <span class="p">/&gt;</span>
+			<span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+		<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+	<span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>và thêm các attributes:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">postsList</span><span class="o">=</span> <span class="p">(</span>
+	<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nc">Post</span> <span class="na">title</span><span class="p">=</span><span class="s">"Phân tích…"</span> <span class="na">author</span><span class="p">=</span><span class="s">"Thành"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Hôm nay…"</span> <span class="na">thumbnail</span><span class="p">=</span><span class="s">"image1.jpg"</span> <span class="p">/&gt;</span>
+		<span class="p">&lt;</span><span class="nc">Post</span> <span class="na">title</span><span class="p">=</span><span class="s">"So sánh…"</span> <span class="na">author</span><span class="p">=</span><span class="s">"Hiếu, An"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Hệ điều…"</span> <span class="na">thumbnail</span><span class="p">=</span><span class="s">"image2.jpg"</span> <span class="p">/&gt;</span>
+		<span class="p">&lt;</span><span class="nc">Post</span> <span class="na">title</span><span class="p">=</span><span class="s">"Làm thế…"</span> <span class="na">author</span><span class="p">=</span><span class="s">"Tùng"</span> <span class="na">description</span><span class="p">=</span><span class="s">"Giải quyết…"</span> <span class="na">thumbnail</span><span class="p">=</span><span class="s">"image3.jpg"</span><span class="p">/&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Một property hữu ích của props là children:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">Link</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="p">=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">href</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+	<span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Props.children là những thông tin được đặt giữa open và closing tag của một Component:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">link1</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"reactjs.org/docs"</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>React docs<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="c1">// link1 bằng &lt;a href="reactjs.org/docs"&gt;&lt;h1&gt;React docs&lt;/h1&gt;&lt;/a&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="xử-lý-các-events">Xử lý các Events</h2>
+
+<p>Việc xử lý các events trong React cũng khá tương tự với . Nhưng có một số khác biệt về syntax:</p>
+
+<ul>
+  <li>Các events trong React sử dụng camelCase (viết thường chữ đầu tiên và viết hoa chữ đầu tiên các từ sau). Ví dụ: onclick ⇒ onClick, onchange ⇒ onChange</li>
+</ul>
+
+<p>Ta có thể pass các hàm để xử lý các events:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">HelloButton</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="kd">function</span> <span class="nx">hello</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">hello</span><span class="si">}</span><span class="p">&gt;</span>say hello<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>!!!LƯU Ý: bạn cần pass một hàm, chứ không phải invoke nó.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c1">// sai    </span>
+<span class="kd">const</span> <span class="nx">HelloButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">hello</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>say hello<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="c1">// đúng</span>
+<span class="kd">const</span> <span class="nx">HelloButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">hello</span><span class="si">}</span><span class="p">&gt;</span>say hello<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Để thêm các các input cho hàm, bạn có thể tạo một <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">anonymous function</a></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">HelloButton</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="kd">function</span> <span class="nx">hello</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">button</span> 
+			<span class="na">onClick</span><span class="p">=</span><span class="si">{</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">hello</span><span class="p">(</span><span class="dl">"</span><span class="s2">React</span><span class="dl">"</span><span class="p">)</span> <span class="si">}</span>
+		<span class="p">&gt;</span>
+			say hello
+		<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="state-trạng-thái">State (trạng thái)</h2>
+
+<p>Trong một trang web, UI sẽ có những Component với với các trạng thái khác nhau. Ví dụ như một cái Counter (đếm số) sẽ có trạng thái là số hiện tại:</p>
+
+<p style="text-align: center;"><img src="/assets/images/posts/2022-08-12-concept-co-ban-react/Untitled.png" alt="Untitled.png" /></p>
+<p>Khi cần dùng đến state, chúng ta có thể sử dụng hàm useState của React:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Hàm useState sẽ trả về một Array với 2 giá trị:
+    <ul>
+      <li>Giá trị thứ nhất chính là biết chứa state hiện tại.</li>
+      <li>Giá trị thứ hai là hàm để thay đổi state đó.</li>
+    </ul>
+  </li>
+  <li>Ta có thể thêm giá trị ban đầu khi của một state khi gọi <code class="language-plaintext highlighter-rouge">useState(initialValue)</code>.</li>
+  <li>Theo convention, ta sẽ đặt tên hàm để thay đổi state giống với state đó và thêm “set” ở đằng trước và viết hoa chữ tiếp theo. Ví dụ bạn muốn lưu một email: <code class="language-plaintext highlighter-rouge">const [email, setEmail] = useState("")</code>.</li>
+</ul>
+
+<p>Quay trở lại với ví dụ một cái Counter, chúng ta có thể tạo Component như sau:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">Counter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Counter<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>-<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+		<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+	<span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ta thêm một state gọi là count và khởi tạo nó với giá 0. Ta dùng nó biến count để hiển thị số đếm hiện tại trong tag &lt;p&gt;. Sau đó ta thêm hai nút và nghe Event onClick để tăng và giảm số đếm hiện tại.</p>
+
+<p>!!!LƯU Ý: Khi dùng useState, không được thay đổi biến được trả về đó mà phải dùng hàm thay đổi state. Trong ví dụ trên nếu dùng <code class="language-plaintext highlighter-rouge">onClick={count++}</code>; số đếm hiện ra màn hình sẽ không thay đổi. Ta phải dùng <code class="language-plaintext highlighter-rouge">setCount(count + 1)</code>.</p>
+
+<h2 id="controlled-component"><strong>Controlled Component</strong></h2>
+
+<p>Controlled Component thường được dùng với những tag như &lt;form&gt;, &lt;input&gt;, &lt;textarea&gt;, &lt;select&gt;,… Để kiểm soát những tag như vậy trong React, ta có thể dùng Controlled Component.</p>
+
+<p>Ví dụ:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">EmailInput</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="p">[</span><span class="nx">email</span><span class="p">,</span> <span class="nx">setEmail</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+	
+	<span class="kd">const</span> <span class="nx">handleChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">setEmail</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="p">=</span><span class="s">"email"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">email</span><span class="si">}</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">handleChange</span><span class="si">}</span><span class="p">/&gt;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ta có thể tạo một state để lưu giá trị email mà người dùng nhập. Ta gắn biến email atribut value của tag &lt;input&gt;. Đồng thời nghe Event onChange để update giá trị email khi người dùng nhập vào ô input.</p>
+
+<p>Để ngăn các hành động mặc định của browser bạn có thể dùng <code class="language-plaintext highlighter-rouge">preventDefault()</code></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">EmailInput</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="p">[</span><span class="nx">email</span><span class="p">,</span> <span class="nx">setEmail</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+	<span class="kd">const</span> <span class="p">[</span><span class="nx">password</span><span class="p">,</span> <span class="nx">setPassword</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+
+	<span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">form</span> <span class="na">onSubmit</span><span class="p">=</span><span class="si">{</span><span class="nx">handleSubmit</span><span class="si">}</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="p">=</span><span class="s">"email"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">email</span><span class="si">}</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">setEmail</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="si">}</span> <span class="p">/&gt;</span>
+			<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="p">=</span><span class="s">"password"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">password</span><span class="si">}</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">setPassword</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="si">}</span> <span class="p">/&gt;</span>
+			<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="p">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Sign In<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+		<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+	<span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ví dụ như <code class="language-plaintext highlighter-rouge">preventDefault()</code> ở đây sẽ tránh browser add thêm query vào url và reload trang.</p>
+
+<h2 id="tham-khảo-thêm">Tham khảo thêm</h2>
+
+<ul>
+  <li>Documentation của React khá đầy đủ và hữu ích. Bạn có thể đọc thêm phần <a href="https://reactjs.org/docs">Main Concepts</a> để hiểu thêm về các Concepts khác trong React.</li>
+  <li><a href="https://www.youtube.com/watch?v=Ke90Tje7VS0">React Tutorial của Mosh Hamedani</a></li>
+</ul>
+
+<h2 id="tổng-kết">Tổng kết</h2>
+
+<p>React là một library open-source với cộng đồng sử dụng lớn. Có rất nhiều bài viết, video, tutorial về React. Chính vì vậy khi sử dụng React, nhất là khi mới bắt đầu học, đừng ngần ngại lên mạng tra khi có câu hỏi. Bởi vì những câu hỏi đó khả năng cao là đã được trả lời. Từ đó các bạn có thể tích lũy cho minh những kiến thức mới về thư viện này.</p>
+
+<p>Cảm ơn các bạn đã đọc bài viết. Nhớ theo dõi UCC Blog để đón đọc các bài viết mới nhé!</p>
+
+            </div>
+            <script src="/assets/js/tocbtn.js"></script>
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-08-12">12 Aug 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#coding">coding</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#code">#code</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <!-- <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="//solar-view/"> &laquo; Phân tích lỗ hổng OS Command Injection trong ứng dụng SolarView Compact 6.0</a>
+            
+            
+            <div class="clearfix"></div>
+            </div> -->
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+<script src="https://giscus.app/client.js"
+        data-repo="USTH-Coders-Club/USTH-Coders-Club.github.io"
+        data-repo-id="R_kgDOG_EjEA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOG_EjEM4CODbv"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+                
+            </div>
+
+            <!-- Categories Jumbotron
+================================================== -->
+            <div class="jumbotron fortags">
+                <div class="d-md-flex h-100">
+                    <div class="col-md-4 transpdark align-self-center text-center h-100">
+                        <div class="d-md-flex align-items-center justify-content-center h-100">
+                            <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                                Explore <span class="d-none d-md-inline">→</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-5 align-self-center text-center">
+                          
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#python"
+                            >python (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#math"
+                            >math (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#computer-science"
+                            >computer science (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#skill"
+                            >skill (2)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#javascript"
+                            >javascript (3)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#Operating-Systems"
+                            >Operating Systems (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#security"
+                            >security (1)</a
+                        >
+                        
+                        <a
+                            class="mt-1 mb-1"
+                            href="/categories#coding"
+                            >coding (1)</a
+                        >
+                          
+                    </div>
+                </div>
+            </div>
+
+            <!-- Begin Footer
+================================================== -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                            Copyright © 2022 USTH Coders Club Blog
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer
+================================================== -->
+        </div>
+        <!-- /.site-content -->
+
+        <!-- Scripts
+================================================== -->
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="/assets/js/mediumish.js"></script>
+
+        
+
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>
